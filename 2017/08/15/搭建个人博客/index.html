@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/git_ssh.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/github_6.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/git_deploy.png">
-<meta property="og:updated_time" content="2017-08-15T10:18:53.245Z">
+<meta property="og:updated_time" content="2017-08-15T10:27:26.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建个人博客">
 <meta name="twitter:description" content="准确的说是用github+git+node.js+hexo搭建个人博客，之前一直想搭建一个个人主页/个人博客，如果是前端/设计，可以用个人主页展示自己的作品，个人博客则可以用来写一些自己的东西。在逛了知乎之后，我总结出建立个人博客的流程大概是这个样子的：买域名-&amp;gt;买主机-&amp;gt;将域名解析到主机-&amp;gt;在主机上搭建lamp环境-&amp;gt;搭建wordpress，当然你也可以购买一站式服务(以">
@@ -341,20 +341,15 @@
         <p>准确的说是用github+git+node.js+hexo搭建个人博客，之前一直想搭建一个个人主页/个人博客，如果是前端/设计，可以用个人主页展示自己的作品，个人博客则可以用来写一些自己的东西。在逛了知乎之后，我总结出建立个人博客的流程大概是这个样子的：买域名-&gt;买主机-&gt;将域名解析到主机-&gt;在主机上搭建lamp环境-&gt;搭建wordpress，当然你也可以购买一站式服务(以上流程打包销售)。可是看了以后<br><a id="more"></a><br>发现价格对我来说有点小贵，而且比较繁琐，于是又有点退缩了，直到我了解到原来github+hexo也可以搭建个人博客！网上的教程很多，不过还是打算写一篇作为自己博客的第一篇文章，以供本博客读者参考(事实上就我一个人……)</p>
 <p>接下来进入正题，首先我们发现上面的流程中需要的几个东西：域名、主机、服务器、开源博客系统，那么在github+hexo中，对应关系是这样子滴~</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/%E6%A6%82%E8%BF%B0.png" alt="概述"></p>
-<p>首先我们安装需要的几个软件：<br><a href="http://oup8vuawm.bkt.clouddn.com/Git-2.14.1-64-bit.exe" target="_blank" rel="external">下载node.js</a><br><a href="http://oup8vuawm.bkt.clouddn.com/node-v6.11.2-x64.msi" target="_blank" rel="external">下载git</a><br><a href="http://oup8vuawm.bkt.clouddn.com/Sublime_Text_3.3126_Setup.exe" target="_blank" rel="external">下载sublime文本编辑器(其他可以编辑md文件的软件也是可以滴)</a></p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>首先我们安装需要的几个软件：<br><a href="http://oup8vuawm.bkt.clouddn.com/Git-2.14.1-64-bit.exe" target="_blank" rel="external">下载node.js</a><br><a href="http://oup8vuawm.bkt.clouddn.com/node-v6.11.2-x64.msi" target="_blank" rel="external">下载git</a><br><a href="http://oup8vuawm.bkt.clouddn.com/Sublime_Text_3.3126_Setup.exe" target="_blank" rel="external">下载sublime文本编辑器(其他可以编辑md文件的软件也是可以滴)</a></p>
 <p>安装过程一路next，注意在安装git的时候勾选此选项，这样可以直接在windows命令行中打开git<br><img src="http://oupdhjhnw.bkt.clouddn.com/git%E5%AE%89%E8%A3%85%E6%B3%A8%E6%84%8F.jpg" alt=""></p>
 <p>安装完成后，同时按windows+r，输入cmd打开windows命令行终端，输入如下命令确认git和node.js是否安装成功：</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F.png" alt="安装成功结果"></p>
 <p>和其他教程的顺序不同，我们先来讲在本地搭建博客，然后将其部署到github上</p>
-<p>本地搭建博客</p>
-<p>首先全局安装hexo，打开命令行，输入以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure>
-<p>然后在D盘新建一个文件夹，叫做hexo(盘符和文件夹名随意，这是我的做法)，命令行跳转到该文件夹下，输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">d:</div><div class="line"></div><div class="line">cd hexo</div><div class="line"></div><div class="line">hexo init</div></pre></td></tr></table></figure>
-<p>初始化完成后输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install</div></pre></td></tr></table></figure>
-<p>然后输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s </div></pre></td></tr></table></figure>
+<h2 id="本地搭建博客"><a href="#本地搭建博客" class="headerlink" title="本地搭建博客"></a>本地搭建博客</h2><p>首先全局安装hexo，打开命令行，输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure></p>
+<p>然后在D盘新建一个文件夹，叫做hexo(盘符和文件夹名随意，这是我的做法)，命令行跳转到该文件夹下，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">d:</div><div class="line">cd hexo</div><div class="line">hexo init</div></pre></td></tr></table></figure></p>
+<p>初始化完成后输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install</div></pre></td></tr></table></figure></p>
+<p>然后输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s </div></pre></td></tr></table></figure></p>
 <p>此时，hexo就已经安装完成，并且可以在本地浏览器打开了<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
 <p>如果一切正常，应该是长这个样子的：</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/hexo.png" alt="hexo"></p>
@@ -363,17 +358,15 @@
 <p>启动服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
 <p>生成静态文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure></p>
 <p>部署到远程站点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
-<p>再更新博客内容并部署之后如果界面未发生变化可以使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean</div></pre></td></tr></table></figure><br>然后再部署</p>
+<p>清除缓存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean</div></pre></td></tr></table></figure><br>然后再部署</p>
 <p>事实上，上面的几个命令可以使用缩写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo n &quot;xxxx&quot;</div><div class="line">hexo s</div><div class="line">hexo g</div><div class="line">hexo d</div><div class="line">hexo c</div></pre></td></tr></table></figure></p>
-<p>下面为hexo更换主题，我选择next主题，命令行输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure>
+<p>下面为hexo更换主题，我选择next主题，命令行输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
 <p>可以看到D:\hexo\themes文件夹下多了一个next文件夹</p>
 <p>然后在D盘hexo根目录下(D:\hexo)打开_config.yml文件，按住ctrl+f键查找thems，将thems:landscape 改成 themes:next即完成主题更换</p>
 <p>也可以在该配置文件中配置作者、语言等<br><img src="http://oupdhjhnw.bkt.clouddn.com/hexo_language.png" alt=""></p>
 <p>next提供了四种样式，可以在next主题目录下(D:\hexo\themes\next)的_config.yml文件中修改，在想要更换的主题前去掉注释#，其他添加#<br><img src="http://oupdhjhnw.bkt.clouddn.com/next_theme.png" alt=""></p>
 <p>接下来我们将如何将本地的hexo部署到github上</p>
-<p>github的准备</p>
-<p>首先注册github账号，已经有的可以略过，<a href="https://github.com/" target="_blank" rel="external">点此打开github</a>，输入用户名，emali，密码后，打开邮箱验证账号，之后新建一个版本库</p>
+<h2 id="github的准备"><a href="#github的准备" class="headerlink" title="github的准备"></a>github的准备</h2><p>首先注册github账号，已经有的可以略过，<a href="https://github.com/" target="_blank" rel="external">点此打开github</a>，输入用户名，emali，密码后，打开邮箱验证账号，之后新建一个版本库</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_1.png" alt=""></p>
 <p>版本库名字为 你的userName.github.io，一定要这么写，否则到后面打开网址将看到一堆乱的排版，然后勾选生成README的复选框,点击创建</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_2.png" alt=""></p>
@@ -381,35 +374,27 @@
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_3.png" alt=""></p>
 <p>滑到Github Pages，下拉框选择master branch，点击保存，在上方会生成一个网址，点击该网址就可以看到你的title和description，如果显示404，可以稍后再试一下</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_4.png" alt=""></p>
-<p>git的准备</p>
-<p>在菜单中找到 Git-&gt;Git bash，打开后输入以下命令连接github账户</p>
+<h2 id="git的准备"><a href="#git的准备" class="headerlink" title="git的准备"></a>git的准备</h2><p>在菜单中找到 Git-&gt;Git bash，打开后输入以下命令连接github账户</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;userName&quot;</div><div class="line">git config --global user.email  &quot;email&quot;</div></pre></td></tr></table></figure>
 <p>userName和email就是注册github账号时的用户名和注册邮箱</p>
-<p>生成密钥</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;email&quot;</div></pre></td></tr></table></figure>
+<p>生成密钥<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;email&quot;</div></pre></td></tr></table></figure></p>
 <p>打开文件夹(C:\Users\sea\.ssh)，发现两个文件：id_rsa，id_rsa.pub，用记事本打开id_rsa.pub，复制里面的内容，回到github上来，点击setings选项，点击左边的deploy keys，添加 deploy key<br>title可以不写，点击key，直接粘贴刚才复制的内容，勾选允许写权限的复选框后，点击添加 </p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_5.png" alt=""></p>
-<p>然后在git bash中输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure>
+<p>然后在git bash中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure></p>
 <p>弹出如下信息表示验证成功</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/git_ssh.png" alt=""></p>
-<p>部署hexo到github上</p>
-<p>打开D盘hexo文件夹根目录的配置文件_config.yml，在最后面添加如下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: xxxx</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<h2 id="部署hexo到github上"><a href="#部署hexo到github上" class="headerlink" title="部署hexo到github上"></a>部署hexo到github上</h2><p>打开D盘hexo文件夹根目录的配置文件_config.yml，在最后面添加如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: xxxx</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
 <p>那个xxxx是什么呢？打开github你新建的项目，如图，选择clone or download，选择use SSH，里面的内容就是xxxx，复制然后粘贴到_config.yml文件中</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_6.png" alt=""></p>
-<p>在部署之前，需要安装一个插件，打开命令行，hexo目录下输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
-<p>然后输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
+<p>在部署之前，需要安装一个插件，打开命令行，hexo目录下输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<p>然后输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo g</div><div class="line">hexo d</div></pre></td></tr></table></figure></p>
 <p>也可以直接输入(生成后再部署)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d -g</div></pre></td></tr></table></figure></p>
 <p>出现如下信息表示部署成功</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/git_deploy.png" alt=""></p>
 <p>点击你在github生成的那个域名就可以访问你的博客了！例如这是我的<a href="https://mysea.github.io/">https://mysea.github.io/</a></p>
 <p>好了，现在你已经拥有自己的在线博客了，整个过程还是比较简单轻松的，不过别高兴的太早，你才刚刚入坑~</p>
 <p>以后每次写博客可以在source下的_post文件夹直接新建 文章标题.md，打开编辑器编辑完成之后，命令行跳转到hexo文件夹下，使用命令 hexo d -g 部署即可，如果在线内容没有更新，多刷新几次页面就可以啦。</p>
-<blockquote><p>hexo <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">点此查看中文文档</a></p>
+<blockquote><p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">点此查看hexo中文文档</a></p>
 </blockquote>
 
       
@@ -479,8 +464,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -524,6 +518,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装"><span class="nav-number">1.</span> <span class="nav-text">下载安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地搭建博客"><span class="nav-number">2.</span> <span class="nav-text">本地搭建博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github的准备"><span class="nav-number">3.</span> <span class="nav-text">github的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git的准备"><span class="nav-number">4.</span> <span class="nav-text">git的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署hexo到github上"><span class="nav-number">5.</span> <span class="nav-text">部署hexo到github上</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
