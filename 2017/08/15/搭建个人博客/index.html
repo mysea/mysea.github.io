@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/git_ssh.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/github_6.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/git_deploy.png">
-<meta property="og:updated_time" content="2017-08-15T08:58:02.950Z">
+<meta property="og:updated_time" content="2017-08-15T09:52:55.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建个人博客">
 <meta name="twitter:description" content="准确的说是用github+git+node.js+hexo搭建个人博客，之前一直想搭建一个个人主页/个人博客，如果是前端/设计，可以用个人主页展示自己的作品，个人博客则可以用来写一些自己的东西。在逛了知乎之后，我总结出建立个人博客的流程大概是这个样子的：买域名-&amp;gt;买主机-&amp;gt;将域名解析到主机-&amp;gt;在主机上搭建lamp环境-&amp;gt;搭建wordpress，当然你也可以购买一站式服务(以">
@@ -341,36 +341,41 @@
         <p>准确的说是用github+git+node.js+hexo搭建个人博客，之前一直想搭建一个个人主页/个人博客，如果是前端/设计，可以用个人主页展示自己的作品，个人博客则可以用来写一些自己的东西。在逛了知乎之后，我总结出建立个人博客的流程大概是这个样子的：买域名-&gt;买主机-&gt;将域名解析到主机-&gt;在主机上搭建lamp环境-&gt;搭建wordpress，当然你也可以购买一站式服务(以上流程打包销售)。可是看了以后<br><a id="more"></a><br>发现价格对我来说有点小贵，而且比较繁琐，于是又有点退缩了，直到我了解到原来github+hexo也可以搭建个人博客！网上的教程很多，不过还是打算写一篇作为自己博客的第一篇文章，以供本博客读者参考(事实上就我一个人……)</p>
 <p>接下来进入正题，首先我们发现上面的流程中需要的几个东西：域名、主机、服务器、开源博客系统，那么在github+hexo中，对应关系是这样子滴~</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/%E6%A6%82%E8%BF%B0.png" alt="概述"></p>
-<p>首先我们安装需要的几个软件：<br><a href="http://oup8vuawm.bkt.clouddn.com/Git-2.14.1-64-bit.exe" target="_blank" rel="external">下载node.js</a><br><a href="http://oup8vuawm.bkt.clouddn.com/node-v6.11.2-x64.msi" target="_blank" rel="external">下载git</a><br><a href="http://oup8vuawm.bkt.clouddn.com/Sublime_Text_3.3126_Setup.exe" target="_blank" rel="external">下载sublime文本编辑器(其他可以编辑md文件的也可以)</a></p>
-<p>安装过程一路next，注意在安装git的时候勾选此选项，这样可以直接在命令行中打开git<br><img src="http://oupdhjhnw.bkt.clouddn.com/git%E5%AE%89%E8%A3%85%E6%B3%A8%E6%84%8F.jpg" alt=""></p>
-<p>安装完成后，同时按windows+r，输入cmd打开命令行终端，输入如下命令确认是否安装成功：</p>
+<p>首先我们安装需要的几个软件：<br><a href="http://oup8vuawm.bkt.clouddn.com/Git-2.14.1-64-bit.exe" target="_blank" rel="external">下载node.js</a><br><a href="http://oup8vuawm.bkt.clouddn.com/node-v6.11.2-x64.msi" target="_blank" rel="external">下载git</a><br><a href="http://oup8vuawm.bkt.clouddn.com/Sublime_Text_3.3126_Setup.exe" target="_blank" rel="external">下载sublime文本编辑器(其他可以编辑md文件的软件也是可以滴)</a></p>
+<p>安装过程一路next，注意在安装git的时候勾选此选项，这样可以直接在windows命令行中打开git<br><img src="http://oupdhjhnw.bkt.clouddn.com/git%E5%AE%89%E8%A3%85%E6%B3%A8%E6%84%8F.jpg" alt=""></p>
+<p>安装完成后，同时按windows+r，输入cmd打开windows命令行终端，输入如下命令确认git和node.js是否安装成功：</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F.png" alt="安装成功结果"></p>
-<p>和其他博客的顺序不同，我们先来讲在本地搭建博客，然后将其部署到github上</p>
+<p>和其他教程的顺序不同，我们先来讲在本地搭建博客，然后将其部署到github上</p>
 <p>本地搭建博客</p>
 <p>首先全局安装hexo，打开命令行，输入以下命令：</p>
 <p>npm install hexo-cli -g</p>
 <p>然后在D盘新建一个文件夹，叫做hexo(盘符和文件夹名随意，这是我的做法)，命令行跳转到该文件夹下，输入</p>
+<p>d:</p>
+<p>cd hexo</p>
 <p>hexo init</p>
 <p>初始化完成后输入</p>
 <p>npm install</p>
 <p>然后输入</p>
 <p>hexo s </p>
-<p>此时，hexo就已经可以在本地浏览器打开了<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
+<p>此时，hexo就已经安装完成，并且可以在本地浏览器打开了<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
 <p>如果一切正常，应该是长这个样子的：</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/hexo.png" alt="hexo"></p>
-<p>hexo的几个常用命令：<br>新建一篇博客<br>hexo new “xxxx”<br>命令完成后可以在D:\hexo\source\_posts目录下发现一个名为xxxx.md的文件，用sublime打开编辑保存即完成一篇博客的更新</p>
+<p>hexo的几个常用命令：</p>
+<p>新建一篇博客<br>hexo new “xxxx”<br>命令完成后可以在D:\hexo\source\_posts目录下发现一个名为xxxx.md的文件，用sublime打开编辑保存即完成一篇博客的更新</p>
 <p>启动服务器<br>hexo server</p>
 <p>生成静态文件<br>hexo generate</p>
 <p>部署到远程站点<br>hexo deploy</p>
-<p>再更新博客内容并部署之后如果界面未发生变化可以使用<br>hexo clean</p>
+<p>再更新博客内容并部署之后如果界面未发生变化可以使用<br>hexo clean<br>然后再部署</p>
 <p>事实上，上面的几个命令可以使用缩写<br>hexo n “xxxx”<br>hexo s<br>hexo g<br>hexo d<br>hexo c</p>
-<p>下面为hexo更换主题，我选择next主题，命令行输入<br>git clone <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next</a> themes/next</p>
+<p>下面为hexo更换主题，我选择next主题，命令行输入</p>
+<p>git clone <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next</a> themes/next</p>
 <p>可以看到D:\hexo\themes文件夹下多了一个next文件夹</p>
-<p>然后在D盘hexo根目录下(D:\hexo)打开_config.yml文件，按住ctrl+f键查找thems，将thems:landscape 改成 themes:next即完成主题更换<br>也可以在该配置文件配置作者、语言等<br><img src="http://oupdhjhnw.bkt.clouddn.com/hexo_language.png" alt=""></p>
+<p>然后在D盘hexo根目录下(D:\hexo)打开_config.yml文件，按住ctrl+f键查找thems，将thems:landscape 改成 themes:next即完成主题更换</p>
+<p>也可以在该配置文件中配置作者、语言等<br><img src="http://oupdhjhnw.bkt.clouddn.com/hexo_language.png" alt=""></p>
 <p>next提供了四种样式，可以在next主题目录下(D:\hexo\themes\next)的_config.yml文件中修改，在想要更换的主题前去掉注释#，其他添加#<br><img src="http://oupdhjhnw.bkt.clouddn.com/next_theme.png" alt=""></p>
 <p>接下来我们将如何将本地的hexo部署到github上</p>
-<p>git和github的准备</p>
-<p>首先注册github账号，已经有的可以略过，<a href="https://github.com/" target="_blank" rel="external">点此打开github</a>，输入用户名，emali，密码后打开邮箱验证账号，之后新建一个版本库</p>
+<p>github的准备</p>
+<p>首先注册github账号，已经有的可以略过，<a href="https://github.com/" target="_blank" rel="external">点此打开github</a>，输入用户名，emali，密码后，打开邮箱验证账号，之后新建一个版本库</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_1.png" alt=""></p>
 <p>版本库名字为 你的userName.github.io，一定要这么写，否则到后面打开网址将看到一堆乱的排版，然后勾选生成README的复选框,点击创建</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_2.png" alt=""></p>
@@ -378,13 +383,13 @@
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_3.png" alt=""></p>
 <p>滑到Github Pages，下拉框选择master branch，点击保存，在上方会生成一个网址，点击该网址就可以看到你的title和description，如果显示404，可以稍后再试一下</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_4.png" alt=""></p>
+<p>git的准备</p>
 <p>在菜单中找到 Git-&gt;Git bash，打开后输入以下命令连接github账户</p>
-<p>git config –global user.name “userName”</p>
-<p>git config –global user.email  “email”</p>
+<p>git config –global user.name “userName”<br>git config –global user.email  “email”</p>
 <p>userName和email就是注册github账号时的用户名和注册邮箱</p>
 <p>生成密钥</p>
 <p>ssh-keygen -t rsa -C “email”</p>
-<p>打开文件夹(C:\Users\sea\.ssh)，发现两个文件：id_rsa,id_rsa.pub，用记事本打开id_rsa.pub，复制里面的内容，回到github上来，点击setings选项，左边的deploy keys，添加 deploy key<br>title可以不屑，点击key，直接粘贴刚才复制的内容，勾选允许写权限的复选框后，点击添加 </p>
+<p>打开文件夹(C:\Users\sea\.ssh)，发现两个文件：id_rsa，id_rsa.pub，用记事本打开id_rsa.pub，复制里面的内容，回到github上来，点击setings选项，点击左边的deploy keys，添加 deploy key<br>title可以不写，点击key，直接粘贴刚才复制的内容，勾选允许写权限的复选框后，点击添加 </p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_5.png" alt=""></p>
 <p>然后在git bash中输入</p>
 <p>ssh -T git@github.com</p>
@@ -404,9 +409,9 @@
 <p>hexo d -g</p>
 <p>出现如下信息表示部署成功</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/git_deploy.png" alt=""></p>
-<p>点击你在github生成的那个域名<a href="https://userName.github.io就可以访问你的博客了！例如这是我的[](https://mysea.github.io/" target="_blank" rel="external">https://userName.github.io就可以访问你的博客了！例如这是我的[](https://mysea.github.io/</a>)</p>
-<p>好了，现在你已经拥有自己的在线博客了，整个过程还是比较简单轻松的，不过别高兴的太早，你才刚刚入坑<del>~///(^v^)\\</del>~</p>
-<p>以后每次写博客可以再source下的_post文件夹直接新建 文章标题.md，打开编辑器编辑完成之后，命令行到hexo文件夹下使用命令 hexo d -g部署即可，如果在线内容没有更新，可以先使用 hexo clean，然后再部署，多试几次即可。</p>
+<p>点击你在github生成的那个域名就可以访问你的博客了！例如这是我的<a href="https://mysea.github.io/">https://mysea.github.io/</a></p>
+<p>好了，现在你已经拥有自己的在线博客了，整个过程还是比较简单轻松的，不过别高兴的太早，你才刚刚入坑<del>~</del>~</p>
+<p>以后每次写博客可以在source下的_post文件夹直接新建 文章标题.md，打开编辑器编辑完成之后，命令行跳转到hexo文件夹下，使用命令 hexo d -g 部署即可，如果在线内容没有更新，可以先使用 hexo clean，然后再生成部署，多试几次即可。</p>
 
       
     </div>
