@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/git_ssh.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/github_6.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/git_deploy.png">
-<meta property="og:updated_time" content="2017-08-15T10:45:01.293Z">
+<meta property="og:updated_time" content="2017-08-15T12:07:35.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建个人博客">
 <meta name="twitter:description" content="准确的说是用github+git+node.js+hexo搭建个人博客，之前一直想搭建一个个人主页/个人博客，如果是前端/设计，可以用个人主页展示自己的作品，个人博客则可以用来写一些自己的东西。在逛了知乎之后，我总结出建立个人博客的流程大概是这个样子的：买域名-&amp;gt;买主机-&amp;gt;将域名解析到主机-&amp;gt;在主机上搭建lamp环境-&amp;gt;搭建wordpress，当然你也可以购买一站式服务(以">
@@ -358,7 +358,7 @@
 <p>生成静态文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure></p>
 <p>部署到远程站点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
 <p>清除缓存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean</div></pre></td></tr></table></figure></p>
-<p>事实上，上面的几个命令可以使用缩写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo n &quot;xxxx&quot;</div><div class="line">hexo s</div><div class="line">hexo g</div><div class="line">hexo d</div><div class="line">hexo c</div></pre></td></tr></table></figure></p>
+<p>事实上，上面的几个命令除了hexo clean之外都可以使用缩写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo n &quot;xxxx&quot;</div><div class="line">hexo s</div><div class="line">hexo g</div><div class="line">hexo d</div></pre></td></tr></table></figure></p>
 <h2 id="更换hexo主题"><a href="#更换hexo主题" class="headerlink" title="更换hexo主题"></a>更换hexo主题</h2><p>下面为hexo更换主题，我选择next主题，命令行输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
 <p>可以看到D:\hexo\themes文件夹下多了一个next文件夹</p>
 <p>然后在D盘hexo根目录下(D:\hexo)打开_config.yml文件，按住ctrl+f键查找thems，将thems:landscape 改成 themes:next即完成主题更换</p>
@@ -392,7 +392,7 @@
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/git_deploy.png" alt=""></p>
 <p>点击你在github生成的那个域名就可以访问你的博客了！例如这是我的<a href="https://mysea.github.io/">https://mysea.github.io/</a></p>
 <p>好了，现在你已经拥有自己的在线博客了，整个过程还是比较简单轻松的，不过别高兴的太早，你才刚刚入坑~</p>
-<p>以后每次写博客可以在source下的_post文件夹直接新建 文章标题.md，打开编辑器编辑完成之后，命令行跳转到hexo文件夹下，使用命令 hexo d -g 部署即可，如果在线内容没有更新，多刷新几次页面就可以啦。</p>
+<p>以后每次写博客可以在source下的_post文件夹直接新建 文章标题.md，打开编辑器编辑完成之后，命令行跳转到hexo文件夹下，使用命令 hexo clean、hexo d -g 部署即可，如果在线内容没有更新，多刷新几次页面就可以啦。</p>
 <blockquote><p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">点此查看hexo中文文档</a></p>
 </blockquote>
 
