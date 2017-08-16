@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170816/7lmbLA6em4.png?imageslim">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170816/AIJGDhLhe1.png?imageslim">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170816/AceDDKlHAa.png?imageslim">
-<meta property="og:updated_time" content="2017-08-16T11:34:33.680Z">
+<meta property="og:updated_time" content="2017-08-16T11:36:17.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客排版那些事儿">
 <meta name="twitter:description" content="上文说过，搭建好个人博客只是刚刚入坑而已，接下来的写作排版才累死人，那么，都有那些坑呢？">
@@ -450,20 +450,18 @@
 <p>设置好账号之后你可以直接拖动图片进去，然后直接复制外链粘贴到文章中即可</p>
 <h2 id="设置博客头像"><a href="#设置博客头像" class="headerlink" title="设置博客头像"></a>设置博客头像</h2><p>把你的头像文件放在next主题文件夹下(D:\hexo\themes\next\source\images)，然后在next文件夹下的主题配置文件_config.yml中找到avator，如下图修改即可</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170816/AIJGDhLhe1.png?imageslim" alt="mark"></p>
-<h2 id="添加标签和分类"><a href="#添加标签和分类" class="headerlink" title="添加标签和分类"></a>添加标签和分类</h2><ol>
-<li><p>在hexo文件夹下，命令行输入hexo new page tags，然后编辑source\tags\index.md文件，添加type为tags：</p>
-<p> title: tags<br> date: 2017-08-16 11:03:46<br> type: “tags”</p>
-</li>
-<li><p>打开主题配置文件(next文件夹下的_config.yml)，取消对应的注释：</p>
-</li>
-</ol>
+<h2 id="添加标签和分类"><a href="#添加标签和分类" class="headerlink" title="添加标签和分类"></a>添加标签和分类</h2><p>1.在hexo文件夹下，命令行输入hexo new page tags，然后编辑source\tags\index.md文件，添加type为tags：</p>
+<pre><code>title: tags
+date: 2017-08-16 11:03:46
+type: &quot;tags&quot;
+</code></pre><p>2.打开主题配置文件(next文件夹下的_config.yml)，取消对应的注释：</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170816/AceDDKlHAa.png?imageslim" alt="mark"></p>
-<ol>
-<li><p>然后在你的文章开头添加tags标签即可：</p>
-<p> title: 博客排版那些事儿<br> date: 2017-08-15 20:02:45<br> categories: “hexo”<br> tags: [hexo,…,…]</p>
-</li>
-</ol>
-<p>同样，命令行输入hexo new page actegories，然后编辑source\categories\index.md文件，添加type为categories，在主题配置文件取消注释，在文章开头添加categories标签即可</p>
+<p>3.然后在你的文章开头添加tags标签即可：</p>
+<pre><code>title: 博客排版那些事儿
+date: 2017-08-15 20:02:45
+categories: &quot;hexo&quot;
+tags: [hexo,...,...]
+</code></pre><p>同样，命令行输入hexo new page actegories，然后编辑source\categories\index.md文件，添加type为categories，在主题配置文件取消注释，在文章开头添加categories标签即可</p>
 <p>其他一些配置参见：<a href="https://github.com/iissnan/hexo-theme-next/wiki" target="_blank" rel="external">next配置</a></p>
 
       
