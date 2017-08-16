@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hexo,搭建博客," />
+  <meta name="keywords" content="hexo," />
 
 
 
@@ -95,7 +95,7 @@
 
 
 <meta name="description" content="准确的说是用github+git+node.js+hexo搭建个人博客，之前一直想搭建一个个人主页/个人博客，如果是前端/设计，可以用个人主页展示自己的作品，个人博客则可以用来写一些自己的东西。在逛了知乎之后，我总结出建立个人博客的流程大概是这个样子的：买域名-&amp;gt;买主机-&amp;gt;将域名解析到主机-&amp;gt;在主机上搭建lamp环境-&amp;gt;搭建wordpress，当然你也可以购买一站式服务(以">
-<meta name="keywords" content="hexo,搭建博客">
+<meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搭建个人博客">
 <meta property="og:url" content="https://mysea.github.io/2017/08/15/搭建个人博客/index.html">
@@ -108,7 +108,6 @@
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/hexo.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/hexo_language.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/next_theme.png">
-<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170816/AIJGDhLhe1.png?imageslim">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/github_1.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/github_2.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/github_3.png">
@@ -117,7 +116,7 @@
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/git_ssh.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/github_6.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/git_deploy.png">
-<meta property="og:updated_time" content="2017-08-16T03:07:22.059Z">
+<meta property="og:updated_time" content="2017-08-16T03:09:36.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建个人博客">
 <meta name="twitter:description" content="准确的说是用github+git+node.js+hexo搭建个人博客，之前一直想搭建一个个人主页/个人博客，如果是前端/设计，可以用个人主页展示自己的作品，个人博客则可以用来写一些自己的东西。在逛了知乎之后，我总结出建立个人博客的流程大概是这个样子的：买域名-&amp;gt;买主机-&amp;gt;将域名解析到主机-&amp;gt;在主机上搭建lamp环境-&amp;gt;搭建wordpress，当然你也可以购买一站式服务(以">
@@ -398,8 +397,6 @@
 <p>然后在D盘hexo根目录下(D:\hexo)打开_config.yml文件，按住ctrl+f键查找thems，将thems:landscape 改成 themes:next即完成主题更换</p>
 <p>也可以在该配置文件中配置作者、语言等<br><img src="http://oupdhjhnw.bkt.clouddn.com/hexo_language.png" alt=""></p>
 <p>next提供了四种样式，可以在next主题目录下(D:\hexo\themes\next)的_config.yml文件中修改，在想要更换的主题前去掉注释#，其他添加#<br><img src="http://oupdhjhnw.bkt.clouddn.com/next_theme.png" alt=""></p>
-<h3 id="设置博客头像"><a href="#设置博客头像" class="headerlink" title="设置博客头像"></a>设置博客头像</h3><p>把你的头像文件放在next主题文件夹下(D:\hexo\themes\next\source\images)，然后在next文件夹下的主题配置文件_config.yml中找到avator，如下图修改即可</p>
-<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170816/AIJGDhLhe1.png?imageslim" alt="mark"></p>
 <p>接下来我们将如何将本地的hexo部署到github上</p>
 <h2 id="github的准备"><a href="#github的准备" class="headerlink" title="github的准备"></a>github的准备</h2><p>首先注册github账号，已经有的可以略过，<a href="https://github.com/" target="_blank" rel="external">点此打开github</a>，输入用户名，emali，密码后，打开邮箱验证账号，然后新建一个版本库</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_1.png" alt=""></p>
@@ -449,8 +446,6 @@
         <div class="post-tags">
           
             <a href="/tags/hexo/" rel="tag"># hexo</a>
-          
-            <a href="/tags/搭建博客/" rel="tag"># 搭建博客</a>
           
         </div>
       
@@ -558,10 +553,10 @@
             
             
             <div class="site-state-item site-state-categories">
-              
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -570,7 +565,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -605,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装"><span class="nav-number">1.</span> <span class="nav-text">下载安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建本地博客"><span class="nav-number">2.</span> <span class="nav-text">搭建本地博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo的常用命令"><span class="nav-number">3.</span> <span class="nav-text">hexo的常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换hexo主题"><span class="nav-number">4.</span> <span class="nav-text">更换hexo主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置博客头像"><span class="nav-number">4.1.</span> <span class="nav-text">设置博客头像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github的准备"><span class="nav-number">5.</span> <span class="nav-text">github的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git的准备"><span class="nav-number">6.</span> <span class="nav-text">git的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署hexo到github上"><span class="nav-number">7.</span> <span class="nav-text">部署hexo到github上</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装"><span class="nav-number">1.</span> <span class="nav-text">下载安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建本地博客"><span class="nav-number">2.</span> <span class="nav-text">搭建本地博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo的常用命令"><span class="nav-number">3.</span> <span class="nav-text">hexo的常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换hexo主题"><span class="nav-number">4.</span> <span class="nav-text">更换hexo主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github的准备"><span class="nav-number">5.</span> <span class="nav-text">github的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git的准备"><span class="nav-number">6.</span> <span class="nav-text">git的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署hexo到github上"><span class="nav-number">7.</span> <span class="nav-text">部署hexo到github上</span></a></li></ol></div>
             
 
           </div>

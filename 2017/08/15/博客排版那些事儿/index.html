@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hexo,博客排版," />
+  <meta name="keywords" content="hexo," />
 
 
 
@@ -95,7 +95,7 @@
 
 
 <meta name="description" content="上文说过，搭建好个人博客只是刚刚入坑而已，接下来的写作排版才累死人，那么，都有那些坑呢？">
-<meta name="keywords" content="hexo,博客排版">
+<meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="博客排版那些事儿">
 <meta property="og:url" content="https://mysea.github.io/2017/08/15/博客排版那些事儿/index.html">
@@ -110,7 +110,9 @@
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170816/Agkc6AaiLE.png?imageslim">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170816/Fd7ahBGhKD.png?imageslim">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170816/7lmbLA6em4.png?imageslim">
-<meta property="og:updated_time" content="2017-08-16T03:07:05.059Z">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170816/AIJGDhLhe1.png?imageslim">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170816/AceDDKlHAa.png?imageslim">
+<meta property="og:updated_time" content="2017-08-16T03:23:59.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客排版那些事儿">
 <meta name="twitter:description" content="上文说过，搭建好个人博客只是刚刚入坑而已，接下来的写作排版才累死人，那么，都有那些坑呢？">
@@ -435,6 +437,17 @@
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170816/Fd7ahBGhKD.png?imageslim" alt="mark"></p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170816/7lmbLA6em4.png?imageslim" alt="mark"></p>
 <p>设置好账号之后你可以直接拖动图片进去，然后直接复制外链粘贴到文章中即可</p>
+<h2 id="设置博客头像"><a href="#设置博客头像" class="headerlink" title="设置博客头像"></a>设置博客头像</h2><p>把你的头像文件放在next主题文件夹下(D:\hexo\themes\next\source\images)，然后在next文件夹下的主题配置文件_config.yml中找到avator，如下图修改即可</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170816/AIJGDhLhe1.png?imageslim" alt="mark"></p>
+<h2 id="添加标签和分类"><a href="#添加标签和分类" class="headerlink" title="添加标签和分类"></a>添加标签和分类</h2><p>在hexo文件夹下，命令行输入hexo new page tags，然后编辑source\tags\index.md文件，添加type为tags：</p>
+<h2 id="lt-codeblock-gt"><a href="#lt-codeblock-gt" class="headerlink" title="&lt;% codeblock %&gt;"></a>&lt;% codeblock %&gt;</h2><p>title: tags<br>date: 2017-08-16 11:03:46</p>
+<h2 id="type-“tags”"><a href="#type-“tags”" class="headerlink" title="type: “tags”"></a>type: “tags”</h2><p>&lt;% endblockcode %&gt;</p>
+<p>打开主题配置文件(next文件夹下的_config.yml)，取消对应的注释：</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170816/AceDDKlHAa.png?imageslim" alt="mark"></p>
+<p>然后在你的文章开头添加tags标签即可</p>
+<h2 id="lt-codeblock-gt-1"><a href="#lt-codeblock-gt-1" class="headerlink" title="&lt;% codeblock %&gt;"></a>&lt;% codeblock %&gt;</h2><p>title: 博客排版那些事儿<br>date: 2017-08-15 20:02:45<br>categories: “hexo”</p>
+<h2 id="tags-hexo-…-…"><a href="#tags-hexo-…-…" class="headerlink" title="tags: [hexo,…,…]"></a>tags: [hexo,…,…]</h2><p>&lt;% endcodeblock %&gt;</p>
+<p>同样，命令行输入hexo new page actegories，然后编辑source\categories\index.md文件，添加type为categories，在主题配置文件取消注释，在文章开头添加categories标签即可</p>
 
       
     </div>
@@ -453,8 +466,6 @@
         <div class="post-tags">
           
             <a href="/tags/hexo/" rel="tag"># hexo</a>
-          
-            <a href="/tags/博客排版/" rel="tag"># 博客排版</a>
           
         </div>
       
@@ -562,10 +573,10 @@
             
             
             <div class="site-state-item site-state-categories">
-              
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -574,7 +585,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -609,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown的语法"><span class="nav-number">1.</span> <span class="nav-text">markdown的语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何插入各级标题"><span class="nav-number">1.1.</span> <span class="nav-text">如何插入各级标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入音频"><span class="nav-number">1.2.</span> <span class="nav-text">插入音频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入视频"><span class="nav-number">1.3.</span> <span class="nav-text">插入视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入列表"><span class="nav-number">1.4.</span> <span class="nav-text">插入列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#无序列表"><span class="nav-number">1.4.1.</span> <span class="nav-text">无序列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有序列表"><span class="nav-number">1.4.2.</span> <span class="nav-text">有序列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入链接"><span class="nav-number">1.5.</span> <span class="nav-text">插入链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">1.6.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块"><span class="nav-number">1.7.</span> <span class="nav-text">代码块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入图片-划重点！！！"><span class="nav-number">2.</span> <span class="nav-text">插入图片(划重点！！！)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown的语法"><span class="nav-number">1.</span> <span class="nav-text">markdown的语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何插入各级标题"><span class="nav-number">1.1.</span> <span class="nav-text">如何插入各级标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入音频"><span class="nav-number">1.2.</span> <span class="nav-text">插入音频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入视频"><span class="nav-number">1.3.</span> <span class="nav-text">插入视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入列表"><span class="nav-number">1.4.</span> <span class="nav-text">插入列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#无序列表"><span class="nav-number">1.4.1.</span> <span class="nav-text">无序列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有序列表"><span class="nav-number">1.4.2.</span> <span class="nav-text">有序列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入链接"><span class="nav-number">1.5.</span> <span class="nav-text">插入链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">1.6.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块"><span class="nav-number">1.7.</span> <span class="nav-text">代码块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入图片-划重点！！！"><span class="nav-number">2.</span> <span class="nav-text">插入图片(划重点！！！)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置博客头像"><span class="nav-number">3.</span> <span class="nav-text">设置博客头像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加标签和分类"><span class="nav-number">4.</span> <span class="nav-text">添加标签和分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-codeblock-gt"><span class="nav-number">5.</span> <span class="nav-text"><% codeblock %></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#type-“tags”"><span class="nav-number">6.</span> <span class="nav-text">type: “tags”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-codeblock-gt-1"><span class="nav-number">7.</span> <span class="nav-text"><% codeblock %></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-hexo-…-…"><span class="nav-number">8.</span> <span class="nav-text">tags: [hexo,…,…]</span></a></li></ol></div>
             
 
           </div>
