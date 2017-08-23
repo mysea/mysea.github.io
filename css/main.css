@@ -1725,7 +1725,8 @@ pre .javascript .function {
   display: block;
   margin: 0 auto;
   padding: 2px;
-  max-width: 120px;
+  max-width: 80px;
+/* $site-author-image-width; */
   height: auto;
   border: 1px solid #eee;
 /* 头像圆形 */
@@ -1817,7 +1818,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0d8cff;
+  background: #ffc9ff;
 }
 .links-of-blogroll {
   font-size: 13px;
