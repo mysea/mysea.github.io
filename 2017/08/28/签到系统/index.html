@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170828/4EC7Hd25Hc.png?imageslim">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170828/DFHa8AaAKc.png?imageslim">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170828/FD70gDf6LL.png?imageslim">
-<meta property="og:updated_time" content="2017-08-28T15:01:50.869Z">
+<meta property="og:updated_time" content="2017-08-28T15:03:47.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="签到系统--过程回顾">
 <meta name="twitter:description" content="当时做的时候没有做详细的记录，现在过去一段时间了，也忘了好些，过程大概是这样的…..">
@@ -151,12 +151,22 @@
 
 
 
-  <title>签到系统--过程回顾 | sea.online</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>签到系统--过程回顾 | sea.online</title>
   
 
 
 
 
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7660b47830c8f5fb763c22dc2b92fa47";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -387,7 +397,7 @@
 <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>签到系统是软件工程课上老师布置的一个期末大作业，要求开发一款扫描二维码签到的安卓app，用来上课点名签到用，要求二维码可以设置失效时间，签到表可以导出为excel。</p>
 <p>当时我第一反应就是教师用网站生成二维码，然后学生用安卓app扫描二维码签到。</p>
 <p>可问题是二维码怎么办？哪里来的二维码？用手机扫描二维码登录网站的情景我用微信qq登录网站时用过，二维码失效我也只在微信二维码上看到过，可问题是我怎么做出微信扫描二维码登录的效果？？？</p>
-<h2 id="转机"><a href="#转机" class="headerlink" title="转机"></a>转机</h2><p>苦思冥想之后还是不知道该怎么办，于是就开始在网上搜啊搜，结果居然让我找到一个视频，虽然它跟签到没关系，而且我也没看太懂它说的，关键是给了我思路！</p>
+<h2 id="转机"><a href="#转机" class="headerlink" title="转机"></a>转机</h2><p>苦思冥想之后还是不知道该怎么办，于是就开始在网上搜啊搜，结果找到一个视频，虽然它跟签到没关系，而且我也没看太懂它说的，关键是给了我思路！</p>
 <p>它给我的思路就是二维码其实只是信息的另一种表示，比如我用字符串生成一个二维码，其实这个二维码扫描得到的结果就是那一串字符而已，那么我在网站上利用第三方的生成二维码的接口，传递一个字符串生成一个二维码，然后手机扫描这个二维码，得到对应的字符串，再携带着这个信息访问网站的api接口，就可以实现签到了!</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170828/4EC7Hd25Hc.png?imageslim" alt="mark"></p>
 <p>这个生成字符串的二维码是什么呢？我的初始设想是教师要填写课程名，有效时间，然后利用这些信息来生成这个二维码。</p>
