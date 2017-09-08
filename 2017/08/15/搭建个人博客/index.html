@@ -123,7 +123,7 @@
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/git_ssh.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/github_6.png">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/git_deploy.png">
-<meta property="og:updated_time" content="2017-09-08T15:18:08.671Z">
+<meta property="og:updated_time" content="2017-09-08T15:33:10.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建个人博客">
 <meta name="twitter:description" content="准确的说是用github+git+node.js+hexo搭建个人博客，之前一直想搭建一个个人主页/个人博客，如果是前端/设计，可以用个人主页展示自己的作品，个人博客则可以用来写一些自己的东西。">
@@ -253,16 +253,6 @@
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
           </a>
         </li>
       
@@ -417,6 +407,7 @@
 <p>发现价格对我来说有点小贵，而且比较繁琐，于是又有点退缩了，直到我了解到原来github+hexo也可以搭建个人博客！网上的教程很多，不过还是打算写一篇作为自己博客的第一篇文章，以供本博客读者参考(事实上就我一个人……)</p>
 <p>接下来进入正题，首先我们发现上面的流程中需要的几个东西：域名、主机、服务器、开源博客系统，那么在github+hexo中，对应关系是这样子滴~</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/%E6%A6%82%E8%BF%B0.png" alt="概述"></p>
+<hr>
 <h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>首先我们安装需要的几个软件：<br><a href="http://oup8vuawm.bkt.clouddn.com/node-v6.11.2-x64.msi" target="_blank" rel="external">下载node.js</a><br><a href="http://oup8vuawm.bkt.clouddn.com/Git-2.14.1-64-bit.exe" target="_blank" rel="external">下载git</a><br><a href="http://oup8vuawm.bkt.clouddn.com/Sublime_Text_3.3126_Setup.exe" target="_blank" rel="external">下载sublime文本编辑器(其他可以编辑md文件的软件也是可以滴)</a></p>
 <p>一开始使用sublime的，后来发现太卡了，所以现在编辑md文件用<a href="https://www.typora.io/" target="_blank" rel="external">typora</a>，但修改配置文件还是会用sublime</p>
 <p>安装过程一路next，注意在安装git的时候勾选此选项，这样可以直接在windows命令行中打开git</p>
@@ -424,24 +415,28 @@
 <p>安装完成后，同时按windows+r，输入cmd打开windows命令行终端，输入如下命令确认git和node.js是否安装成功：</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F.png" alt="安装成功结果"></p>
 <p>和其他教程的顺序不同，我们先来讲在本地搭建博客，然后将其部署到github上</p>
+<hr>
 <h2 id="搭建本地博客"><a href="#搭建本地博客" class="headerlink" title="搭建本地博客"></a>搭建本地博客</h2><p>首先全局安装hexo，打开命令行，输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure></p>
 <p>然后在D盘新建一个文件夹，叫做hexo(盘符和文件夹名随意，这是我的做法)，命令行跳转到该文件夹下，输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">d:</div><div class="line">cd hexo</div><div class="line">hexo init</div></pre></td></tr></table></figure></p>
 <p>初始化完成后输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install</div></pre></td></tr></table></figure></p>
 <p>然后输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s </div></pre></td></tr></table></figure></p>
 <p>此时，hexo就已经安装完成，并且可以在本地浏览器打开了<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a><br>如果一切正常，应该是长这个样子的：</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/hexo.png" alt="hexo"></p>
+<hr>
 <h2 id="hexo的常用命令"><a href="#hexo的常用命令" class="headerlink" title="hexo的常用命令"></a>hexo的常用命令</h2><p>新建一篇博客<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;你的文章标题&quot;</div></pre></td></tr></table></figure><br>命令完成后在D:\hexo\source\_posts目录下就会生成一个对应的 xx.md的文件，用sublime打开编辑保存即完成一篇博客的撰写</p>
 <p>启动服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
 <p>生成静态文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure></p>
 <p>部署到远程站点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
 <p>清除缓存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean</div></pre></td></tr></table></figure></p>
 <p>事实上，上面的几个命令除了hexo clean之外都可以使用缩写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo n &quot;xxxx&quot;</div><div class="line">hexo s</div><div class="line">hexo g</div><div class="line">hexo d</div></pre></td></tr></table></figure></p>
+<hr>
 <h2 id="更换hexo主题"><a href="#更换hexo主题" class="headerlink" title="更换hexo主题"></a>更换hexo主题</h2><p>下面为hexo更换主题，我选择next主题，命令行输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
 <p>可以看到D:\hexo\themes文件夹下多了一个next文件夹</p>
 <p>然后在D盘hexo根目录下(D:\hexo)打开_config.yml文件，按住ctrl+f键查找thems，将thems:landscape 改成 themes:next即完成主题更换</p>
 <p>也可以在该配置文件中配置作者、语言等<br><img src="http://oupdhjhnw.bkt.clouddn.com/hexo_language.png" alt=""></p>
 <p>next提供了四种样式，可以在next主题目录下(D:\hexo\themes\next)的_config.yml文件中修改，在想要更换的主题前去掉注释#，其他添加#<br><img src="http://oupdhjhnw.bkt.clouddn.com/next_theme.png" alt=""></p>
 <p>接下来我们将如何将本地的hexo部署到github上</p>
+<hr>
 <h2 id="github的准备"><a href="#github的准备" class="headerlink" title="github的准备"></a>github的准备</h2><p>首先注册github账号，已经有的可以略过，<a href="https://github.com/" target="_blank" rel="external">点此打开github</a>，输入用户名，emali，密码后，打开邮箱验证账号，然后新建一个版本库</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_1.png" alt=""></p>
 <p>版本库名字为 你的github昵称 userName.github.io，一定要这么写，否则到后面打开网址将看到一堆乱的排版，然后勾选生成README的复选框,点击创建</p>
@@ -450,6 +445,7 @@
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_3.png" alt=""></p>
 <p>滑到Github Pages，下拉框选择master branch，点击保存，在上方会生成一个网址，点击该网址就可以看到你的title和description，如果显示404，可以稍后再试一下</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_4.png" alt=""></p>
+<hr>
 <h2 id="git的准备"><a href="#git的准备" class="headerlink" title="git的准备"></a>git的准备</h2><p>在windows菜单中找到 Git-&gt;Git bash，打开后输入以下命令连接github账户</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;userName&quot;</div><div class="line">git config --global user.email  &quot;email&quot;</div></pre></td></tr></table></figure>
 <p>userName和email就是注册github账号时的用户名和注册邮箱</p>
@@ -459,6 +455,7 @@
 <p>然后在git bash中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure></p>
 <p>弹出如下信息表示验证成功</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/git_ssh.png" alt=""></p>
+<hr>
 <h2 id="部署hexo到github上"><a href="#部署hexo到github上" class="headerlink" title="部署hexo到github上"></a>部署hexo到github上</h2><p>打开D盘hexo文件夹根目录的配置文件_config.yml，在最后面添加如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: xxxx</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
 <p>那个xxxx是什么呢？打开github你新建的项目，如图，选择clone or download，选择use SSH，矩形框里面的内容就是xxxx，复制然后粘贴到_config.yml文件中</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/github_6.png" alt=""></p>
