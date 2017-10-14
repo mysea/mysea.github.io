@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170828/4EC7Hd25Hc.png?imageslim">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170828/DFHa8AaAKc.png?imageslim">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170828/FD70gDf6LL.png?imageslim">
-<meta property="og:updated_time" content="2017-09-08T15:33:16.486Z">
+<meta property="og:updated_time" content="2017-10-14T12:40:49.294Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="签到系统--过程回顾">
 <meta name="twitter:description" content="当时做的时候没有做详细的记录，现在过去一段时间了，也忘了好些，过程大概是这样的…..">
@@ -423,7 +423,6 @@
 <p>当时的考虑是这样的，一个老师可以签到多次，也就是生成多个二维码，一对多的关系；一个二维码对应多个学生，一个学生对应多个二维码，多对多的关系。</p>
 <hr>
 <h2 id="行动！敲代码！"><a href="#行动！敲代码！" class="headerlink" title="行动！敲代码！"></a>行动！敲代码！</h2><p>数据库有了，接下来就是敲代码了！问题又来了，我没做过网站啊……查了很多，比如python，php，ssh，甚至wordpress。最终选择还是用java吧，毕竟大学学的主要是java，一开始打算用ssh框架做网站，后来发现，其实java web就可以啊！在网上自学了一段时间后，开始把学到的知识应用到签到系统的网站端。</p>
-<p>且慢！你不是计算机专业的吗？怎么还要自学？呃，是这样的，大二学过jsp课程，然而老师都只是讲书念ppt，学了一点皮毛然而真的什么都做不出来，也不知道有什么用，只能敲敲书上的demo。也怪自己当初网上找资源能力不强。</p>
 <hr>
 <h2 id="java-web"><a href="#java-web" class="headerlink" title="java web"></a>java web</h2><p>其实网站做起来还是比较轻松的，……此处省略几百个bug……，因为原型图已经设计好了，数据库也设计好了，并且你也会技术了，接下来就是按照设计图实施而已。</p>
 <p>主要原理就是MVC模式，M就是bean+dao类，bean类就是和数据库表对应的类，dao类就是对对应的表进行增删改查操作；V就是jsp页面，利用jstl、el标签对数据进行展示；C就是servlet，jsp里的表单的action属性的值对应着一个servlet，当提交表单的时候会跳转到对应的servlet，servlet调用dao类的方法处理数据之后，将数据在发送到jsp页面进行显示。不同的servlet之间，servlet和jsp之间可以通过内置对象比如request传递数据。</p>
@@ -593,7 +592,7 @@
                alt="sea" />
           <p class="site-author-name" itemprop="name">sea</p>
            
-              <p class="site-description motion-element" itemprop="description">要多努力才能看起来毫不费力</p>
+              <p class="site-description motion-element" itemprop="description">这是我的个人博客</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -724,7 +723,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共7.8k字</span>
+  <span class="post-count">博客全站共7.7k字</span>
 </div>
         
 <div class="busuanzi-count">
