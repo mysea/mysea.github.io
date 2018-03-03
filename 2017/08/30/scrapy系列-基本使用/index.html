@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="上瘾模型," />
+  <meta name="keywords" content="scrapy," />
 
 
 
@@ -101,21 +101,29 @@
 
 
 
-<meta name="description" content="也许真的如那张图片所示，100年前的人躺在床上吸鸦片的姿势和100年后的人躺在床上玩手机的姿势如出一辙，手机就是现代的精神鸦片。而那些所谓的巨头、互联网公司，则在不断地往“烟斗”中添加“鸦片”，为了更多的用户流量，更长的用户活跃时长……">
-<meta name="keywords" content="上瘾模型">
+<meta name="description" content="scrapy是python的一个爬虫框架.">
+<meta name="keywords" content="scrapy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="上瘾--培养用户使用习惯">
-<meta property="og:url" content="https://mysea.github.io/2017/08/19/上瘾-培养用户使用习惯/index.html">
+<meta property="og:title" content="scrapy系列之基本使用">
+<meta property="og:url" content="https://mysea.github.io/2017/08/30/scrapy系列-基本使用/index.html">
 <meta property="og:site_name" content="sea.online">
-<meta property="og:description" content="也许真的如那张图片所示，100年前的人躺在床上吸鸦片的姿势和100年后的人躺在床上玩手机的姿势如出一辙，手机就是现代的精神鸦片。而那些所谓的巨头、互联网公司，则在不断地往“烟斗”中添加“鸦片”，为了更多的用户流量，更长的用户活跃时长……">
+<meta property="og:description" content="scrapy是python的一个爬虫框架.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170819/ejkj8ILDHK.jpg?imageslim">
-<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170819/1J2i8F4Che.jpg?imageslim">
-<meta property="og:updated_time" content="2017-09-08T15:33:24.571Z">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/Djifggh46f.png?imageslim">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/mHkLAEEHc7.png?imageslim">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/K79E1gHe2L.png?imageslim">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/1aiDe6J31b.png?imageslim">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/jfeDcGhCI3.png?imageslim">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/2DlG2gLkBk.png?imageslim">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/3b304f3kkg.png?imageslim">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/4L6Li6lhlF.png?imageslim">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/BfhKFkBE0J.png?imageslim">
+<meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/l4ml03D2Ad.png?imageslim">
+<meta property="og:updated_time" content="2017-08-30T05:34:12.137Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="上瘾--培养用户使用习惯">
-<meta name="twitter:description" content="也许真的如那张图片所示，100年前的人躺在床上吸鸦片的姿势和100年后的人躺在床上玩手机的姿势如出一辙，手机就是现代的精神鸦片。而那些所谓的巨头、互联网公司，则在不断地往“烟斗”中添加“鸦片”，为了更多的用户流量，更长的用户活跃时长……">
-<meta name="twitter:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170819/ejkj8ILDHK.jpg?imageslim">
+<meta name="twitter:title" content="scrapy系列之基本使用">
+<meta name="twitter:description" content="scrapy是python的一个爬虫框架.">
+<meta name="twitter:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/170830/Djifggh46f.png?imageslim">
 
 
 
@@ -144,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="https://mysea.github.io/2017/08/19/上瘾-培养用户使用习惯/"/>
+  <link rel="canonical" href="https://mysea.github.io/2017/08/30/scrapy系列-基本使用/"/>
 
 
 
 
 
-  <title>上瘾--培养用户使用习惯 | sea.online</title>
+  <title>scrapy系列之基本使用 | sea.online</title>
   
 
 
@@ -238,7 +246,7 @@
         <li class="menu-item menu-item-prototype">
           <a href="/prototype/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-product-hunt"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             原型
           </a>
@@ -258,7 +266,7 @@
         <li class="menu-item menu-item-booklist">
           <a href="/booklist/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             书单
           </a>
@@ -297,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mysea.github.io/2017/08/19/上瘾-培养用户使用习惯/">
+    <link itemprop="mainEntityOfPage" href="https://mysea.github.io/2017/08/30/scrapy系列-基本使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sea">
@@ -314,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">上瘾--培养用户使用习惯</h1>
+          <h1 class="post-title" itemprop="name headline">scrapy系列之基本使用</h1>
         
 
         <div class="post-meta">
@@ -326,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-19T09:30:14+08:00">
-                2017-08-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T11:01:27+08:00">
+                2017-08-30
               </time>
             
 
@@ -349,8 +357,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
                   </a>
                 </span>
 
@@ -391,48 +399,40 @@
       
 
       
-        <p>也许真的如那张图片所示，100年前的人躺在床上吸鸦片的姿势和100年后的人躺在床上玩手机的姿势如出一辙，手机就是现代的精神鸦片。而那些所谓的巨头、互联网公司，则在不断地往“烟斗”中添加“鸦片”，为了更多的用户流量，更长的用户活跃时长……<br><a id="more"></a></p>
-<p>注：本文首发于我的微信订阅号</p>
-<h2 id="上瘾模型四部曲"><a href="#上瘾模型四部曲" class="headerlink" title="上瘾模型四部曲"></a>上瘾模型四部曲</h2><p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170819/ejkj8ILDHK.jpg?imageslim" alt="mark"></p>
-<h3 id="触发"><a href="#触发" class="headerlink" title="触发"></a>触发</h3><p>分为外部触发（外界引起的），内部触发（主观意愿），外部触发就好比是闹钟叫你起床，内部触发是自己主动起床。</p>
-<p>生活中的例子：</p>
-<p>外部触发，比如短信提醒、状态栏通知、消息红点提示、优惠券、他人的分享；</p>
-<p>内部触发，比如每天主动打开微信查看是否有聊天信息、蚂蚁森林收集能量。</p>
-<h3 id="行动"><a href="#行动" class="headerlink" title="行动"></a>行动</h3><p>触发的目的就是促使用户行动起来，但是要使用户行动起来并完成任务，就要求产品简单可行：KISS原则（keep is simple,keep it stupid）。</p>
-<p>如何让产品简单？</p>
-<p>流程简化：<br>了解使用产品的原因，列出使用产品的必经环节，做减法删除无关的环节；</p>
-<p>界面简化：<br>交互更人性化，更易于使用；</p>
-<p>任务简化：<br>将希望用户所做的投入分解成小块任务，从小而简单的任务开始，之后逐步加大难度。</p>
-<h3 id="多变的酬赏"><a href="#多变的酬赏" class="headerlink" title="多变的酬赏"></a>多变的酬赏</h3><p>在用户行动起来之后就要给用户多变的酬赏，多变的原因在于人们喜欢酬赏的不确定性，比如赌博，通过多变的酬赏让用户进入下一个阶段。</p>
-<p>酬赏分为三种类型：</p>
-<p>社交酬赏：获得资源、金钱、信息</p>
-<p>猎物酬赏：来自他人的认同</p>
-<p>自我酬赏：操控感、成就感、胜任感</p>
-<h3 id="再投入"><a href="#再投入" class="headerlink" title="再投入"></a>再投入</h3><p>人会高估自己做过的东西的价值，因为有他自己的参与在里面，参与程度越高，认同感就会越强，通过让用户在产品上留下自己的努力或印记，比如宜家让用户自己组装家居、比如用户的每一次评论、发帖、回复之后，那么他再次打开这个app的可能性就会大大增加。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是上瘾模型的四个要素，触发-行动-多变的酬赏-再投入，通过不断的循环这个模型，让用户养成习惯，又或者说对产品上瘾，个人以为，触发的目的在于让用户行动，酬赏的目的在于继续投入，当用户在产品上投入的时间越来越长，那么他的活跃度会很高，放弃这个产品转向其他产品的可能就会降低很多，总的来说，就是要让用户养成习惯，然后不断的投入。</p>
-<hr>
-<h2 id="上瘾模型与道德操控"><a href="#上瘾模型与道德操控" class="headerlink" title="上瘾模型与道德操控"></a>上瘾模型与道德操控</h2><p>四象限：判断你的产品是不是在操控用户</p>
-<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170819/1J2i8F4Che.jpg?imageslim" alt="mark"></p>
-<hr>
-<h2 id="如何创建用户习惯"><a href="#如何创建用户习惯" class="headerlink" title="如何创建用户习惯"></a>如何创建用户习惯</h2><p>通过习惯测试：</p>
-<p>首先你得有自己的产品，然后得有一批用户，然后：</p>
-<p>从这些用户中找到那些忠实用户（如何才算忠实用户？使用产品的频率达到一个标准；忠实用户数量得有多少？至少的用户总数的5%）；</p>
-<p>观察这些忠实用户使用产品的习惯，发现其中的通用性（共同具有的一系列相似行为）；</p>
-<p>推动新用户朝忠实用户所采取的习惯路径前进，将新用户转变为忠实用户。</p>
-<hr>
-<h2 id="举个例子：蚂蚁森林是如何应用上瘾模型的？"><a href="#举个例子：蚂蚁森林是如何应用上瘾模型的？" class="headerlink" title="举个例子：蚂蚁森林是如何应用上瘾模型的？"></a>举个例子：蚂蚁森林是如何应用上瘾模型的？</h2><h3 id="触发-1"><a href="#触发-1" class="headerlink" title="触发"></a>触发</h3><p>外部触发：</p>
-<p>1.支付宝集五福，通过给好友浇能量可以有机会得到一张福卡；</p>
-<p>2.好友收集了你的能量后支付宝首页会有提示；</p>
-<p>3.其他人种完树后分享到支付宝生活状态/微信朋友圈。</p>
-<p>内部触发：</p>
-<p>自己想要种一棵树而主动去收集能量。</p>
-<h3 id="行动-1"><a href="#行动-1" class="headerlink" title="行动"></a>行动</h3><p>通过开启支付宝自启动记录步行来产生能量；</p>
-<p>通过在线支付产生能量（在线支付可以产生能量仅限于和支付宝有合作的商家）。</p>
-<h3 id="多变的酬赏-1"><a href="#多变的酬赏-1" class="headerlink" title="多变的酬赏"></a>多变的酬赏</h3><p>社交酬赏：两个好友一周互相收集能量PK，好友能量排行榜，已种树好友的种树标识，动态（谁谁在什么时候收集了你多少能量）；</p>
-<p>能量酬赏：收集能量每次都是不相同的，可能多可能少；</p>
-<p>成就酬赏：随着用户的不断投入，能量进度条的不断增长，离目标越来越近；</p>
-<p>能量产生的时间不确定：大部分能量集中产生于早上7：22左右，但其他时间段也会有个别能量产生。</p>
-<h3 id="再投入-1"><a href="#再投入-1" class="headerlink" title="再投入"></a>再投入</h3><p>用户每天多次主动打开支付宝收集能量，形成习惯。</p>
+        <p>scrapy是python的一个爬虫框架.</p>
+<a id="more"></a>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>开发环境：win10|python3|pycharm<br>爬取网站：quotes.toscrape.com<br>网站描述：scrapy官方为了示范而建立的一个网站，总共有10个页面，每个页面有10条名言，名言组成包括名言、作者、标签。<br>网址：<a href="http://quotes.toscrape.com/" target="_blank" rel="external">Quotes to Scrape</a></p>
+<h2 id="scrapy基本命令"><a href="#scrapy基本命令" class="headerlink" title="scrapy基本命令"></a>scrapy基本命令</h2><p>首先我在D盘建立一个新目录scrapy，专门存放爬虫项目，然后命令行转到该目录下：</p>
+<p>新建一个项目，名为quotetutorial<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scrapy startproject quotetutorial</div></pre></td></tr></table></figure></p>
+<p>进入项目根目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd quotetutorial</div></pre></td></tr></table></figure></p>
+<p>用命令新建一个爬虫，名称为quotes，爬取的网站为quotes.toscrape.com<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scrapy genspider quotes quotes.toscrape.com</div></pre></td></tr></table></figure></p>
+<p>开始爬取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scrapy crawl quote</div></pre></td></tr></table></figure></p>
+<p>输入命令后可以看到用模板生成了一个爬虫：</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170830/Djifggh46f.png?imageslim" alt="mark"></p>
+<p>之后开始爬取，弹出一堆信息后结束，比如总共爬取了0个页面，先爬取了网站的robots.txt文件，结果显示404，表示网站没有该文件，然后爬取主页面，显示200表示请求成功：</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170830/mHkLAEEHc7.png?imageslim" alt="mark"></p>
+<h2 id="爬取首页上的名言、作者、标签"><a href="#爬取首页上的名言、作者、标签" class="headerlink" title="爬取首页上的名言、作者、标签"></a>爬取首页上的名言、作者、标签</h2><p>用pycharm打开quotetutorial项目，spider下的quotes.py就是我们用命令行创建的爬虫主文件，下面的items.py用来定于属性，middlewears.py用来定义中间件，pipelines.py用来保存数据到数据库，settings.py就是设置文件。</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170830/K79E1gHe2L.png?imageslim" alt="mark"></p>
+<p>打开quotes.py，可以看到name=”quotes”，name值是唯一的，不同的爬虫项目的爬虫名不能相同，allowed_domains表示爬取网站的域名，用来过滤掉哪些你不想爬取的网站，start_urls表示一开始爬取的网站。parse函数用来处理第一次请求得到的响应，也就是请求start_urls返回的响应。</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170830/1aiDe6J31b.png?imageslim" alt="mark"></p>
+<p>我们打开浏览器，鼠标移到第一个名言上，鼠标右键-检查元素，可以看到所有的名言都被包裹在class=”quote”的div标签里：</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170830/jfeDcGhCI3.png?imageslim" alt="mark"></p>
+<p>展开之后可以看到名言内容在class=”text”的标签里，作者是在class=”author”的标签里，标签是在class=”tags”里面class=”tag”的标签里，且tag可能有多个</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170830/2DlG2gLkBk.png?imageslim" alt="mark"></p>
+<p>所以我们用css选择器先拿到所有quote标签，然后遍历每个quote，分别提取text，author，tags下面的tag的内容。</p>
+<p>但首先我们先在items.py里定义属性：</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170830/3b304f3kkg.png?imageslim" alt="mark"></p>
+<p>然后在quotes.py中导入使用即可:</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170830/4L6Li6lhlF.png?imageslim" alt="mark"></p>
+<h3 id="css选择器"><a href="#css选择器" class="headerlink" title="css选择器"></a>css选择器</h3><p>css选择器就是利用css的语法来选择相应的标签，比如class=”text”，id=”text”，用css选择器选择其中的内容就是 css(‘.text’) 、css(‘#text’)，比如说a标签，就用css(‘a’)选择就行了，如果要选择标签里的文本内容，标签属性的值，就可以用::的形式，比如css(‘.text::text’)，css(‘a::attr(href)’).</p>
+<h3 id="extract-first-和extract"><a href="#extract-first-和extract" class="headerlink" title="extract_first()和extract()"></a>extract_first()和extract()</h3><p>extract_first()表示只选取第一个值，extract()表示选取全部值</p>
+<h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><h3 id="scrapy-shell"><a href="#scrapy-shell" class="headerlink" title="scrapy shell"></a>scrapy shell</h3><p>我们可以在命令行中用scrapy shell进行调试，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scrapy shell http://quotes.toscrape.com/ --nolog</div></pre></td></tr></table></figure></p>
+<h2 id="导出数据为json"><a href="#导出数据为json" class="headerlink" title="导出数据为json"></a>导出数据为json</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scrapy crawl quotes -o quotes.json</div></pre></td></tr></table></figure>
+<h2 id="爬取全部页面"><a href="#爬取全部页面" class="headerlink" title="爬取全部页面"></a>爬取全部页面</h2><p>目前我们只是爬取了首页的内容，现在我们要爬取10个页面的内容。鼠标移到next按钮，右键检查元素后发现我们要找的下一页的url在a标签的href属性里，点击next之后发现url就是首页的url+href的值</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170830/BfhKFkBE0J.png?imageslim" alt="mark"></p>
+<p>所以我们通过获取href属性值，拼接字符串，然后循环调用parse函数即可获取全部页面内容：</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/170830/l4ml03D2Ad.png?imageslim" alt="mark"></p>
+<h2 id="保存数据到mongodb"><a href="#保存数据到mongodb" class="headerlink" title="保存数据到mongodb"></a>保存数据到mongodb</h2><p>打开pipeline.py</p>
 
       
     </div>
@@ -477,7 +477,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://mysea.github.io/2017/08/19/上瘾-培养用户使用习惯/" title="上瘾--培养用户使用习惯">https://mysea.github.io/2017/08/19/上瘾-培养用户使用习惯/</a>
+    <a href="https://mysea.github.io/2017/08/30/scrapy系列-基本使用/" title="scrapy系列之基本使用">https://mysea.github.io/2017/08/30/scrapy系列-基本使用/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -492,7 +492,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/上瘾模型/" rel="tag"><i class="fa fa-tag"></i> 上瘾模型</a>
+            <a href="/tags/scrapy/" rel="tag"><i class="fa fa-tag"></i> scrapy</a>
           
         </div>
       
@@ -505,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/16/无价/" rel="next" title="无价">
-                <i class="fa fa-chevron-left"></i> 无价
+              <a href="/2017/08/28/签到系统/" rel="next" title="签到系统--过程回顾">
+                <i class="fa fa-chevron-left"></i> 签到系统--过程回顾
               </a>
             
           </div>
@@ -515,8 +515,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/28/mongodb安装及配置/" rel="prev" title="mongodb安装及配置">
-                mongodb安装及配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/31/作业在线提交和批改系统/" rel="prev" title="作业在线提交和批改系统">
+                作业在线提交和批改系统 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +594,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -605,7 +605,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -616,7 +616,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -638,32 +638,12 @@
           <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              资讯推荐
+              github
             </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="https://sspai.com/" title="少数派" target="_blank">少数派</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://36kr.com/" title="36氪" target="_blank">36氪</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.199it.com/" title="199IT" target="_blank">199IT</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.geekpark.net/" title="极客公园" target="_blank">极客公园</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.guokr.com/" title="果壳" target="_blank">果壳</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.woshipm.com/" title="人人都是产品经理" target="_blank">人人都是产品经理</a>
+                  <a href="https://github.com/mysea" title="github" target="_blank">github</a>
                 </li>
               
             </ul>
@@ -685,7 +665,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#上瘾模型四部曲"><span class="nav-number">1.</span> <span class="nav-text">上瘾模型四部曲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#触发"><span class="nav-number">1.1.</span> <span class="nav-text">触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行动"><span class="nav-number">1.2.</span> <span class="nav-text">行动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多变的酬赏"><span class="nav-number">1.3.</span> <span class="nav-text">多变的酬赏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再投入"><span class="nav-number">1.4.</span> <span class="nav-text">再投入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上瘾模型与道德操控"><span class="nav-number">3.</span> <span class="nav-text">上瘾模型与道德操控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何创建用户习惯"><span class="nav-number">4.</span> <span class="nav-text">如何创建用户习惯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#举个例子：蚂蚁森林是如何应用上瘾模型的？"><span class="nav-number">5.</span> <span class="nav-text">举个例子：蚂蚁森林是如何应用上瘾模型的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#触发-1"><span class="nav-number">5.1.</span> <span class="nav-text">触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行动-1"><span class="nav-number">5.2.</span> <span class="nav-text">行动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多变的酬赏-1"><span class="nav-number">5.3.</span> <span class="nav-text">多变的酬赏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再投入-1"><span class="nav-number">5.4.</span> <span class="nav-text">再投入</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scrapy基本命令"><span class="nav-number">2.</span> <span class="nav-text">scrapy基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爬取首页上的名言、作者、标签"><span class="nav-number">3.</span> <span class="nav-text">爬取首页上的名言、作者、标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#css选择器"><span class="nav-number">3.1.</span> <span class="nav-text">css选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extract-first-和extract"><span class="nav-number">3.2.</span> <span class="nav-text">extract_first()和extract()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yield"><span class="nav-number">3.3.</span> <span class="nav-text">yield</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrapy-shell"><span class="nav-number">3.4.</span> <span class="nav-text">scrapy shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导出数据为json"><span class="nav-number">4.</span> <span class="nav-text">导出数据为json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爬取全部页面"><span class="nav-number">5.</span> <span class="nav-text">爬取全部页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存数据到mongodb"><span class="nav-number">6.</span> <span class="nav-text">保存数据到mongodb</span></a></li></ol></div>
             
 
           </div>
@@ -717,7 +697,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共12.8k字</span>
+  <span class="post-count">博客全站共7.8k字</span>
 </div>
         
 <div class="busuanzi-count">
