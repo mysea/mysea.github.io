@@ -264,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mysea.github.io/2018/03/04/作业系统简介/">
+    <link itemprop="mainEntityOfPage" href="https://mysea.github.io/2018/03/22/java-web基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sea">
@@ -283,7 +283,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/04/作业系统简介/" itemprop="url">作业系统简介</a></h1>
+                <a class="post-title-link" href="/2018/03/22/java-web基础/" itemprop="url">java web基础</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-04T19:32:48+08:00">
-                2018-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T18:51:48+08:00">
+                2018-03-22
               </time>
             
 
@@ -305,6 +305,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试准备/" itemprop="url" rel="index">
+                    <span itemprop="name">面试准备</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -334,14 +356,387 @@
 
       
         
-          <p>图文简介<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/04/作业系统简介/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <a id="more"></a>
+<p>说到java web，只用文字说明未免有点死记硬背的感觉，不如结合实际项目来体会好些。以前是用Eclipse和Tomcat开发java web的，但现在已经习惯了用IDEA，所以根据这篇教程<a href="https://www.cnblogs.com/carsonzhu/p/5468223.html" target="_blank" rel="external">使用IntelliJ IDEA开发java web</a>在IDEA中创建一个java web项目。</p>
+<p>在java web项目创建Servlet、Fliter、Listener，可以直接用注解的方式进行配置，在类前面加上注解@WebServlet(“/login”)、@WebFilter(urlPatterns={“/*”})、@WebListener()；也可以在web.xml中配置，如下图：<br><img src="http://oupdhjhnw.bkt.clouddn.com/blog/180323/0eLKiKi4Gl.png?imageslim" alt="mark"><br>对于Filter和Listener只需要把Servlet替换成Fliter和Listener即可。建议使用注解的方式配置，这样web.xml看起来舒服多了。</p>
+<h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><h3 id="1-阐述Servlet和CGI的区别"><a href="#1-阐述Servlet和CGI的区别" class="headerlink" title="1. 阐述Servlet和CGI的区别"></a>1. 阐述Servlet和CGI的区别</h3><p>两者的区别在于Servlet处于服务器进程中，通过多线程的方式运行其Service()方法，一个实例可以服务多个请求，并且实例一般不会销毁；<br>CGI对每个请求都产生新的进程，服务完成后就销毁，所以效率低于Servlet。</p>
+<h3 id="2-Servlet接口中有哪些方法？"><a href="#2-Servlet接口中有哪些方法？" class="headerlink" title="2. Servlet接口中有哪些方法？"></a>2. Servlet接口中有哪些方法？</h3><p>在java web项目中新建一个Servlet类，可以看到这个Servlet继承于一个抽象类HttpServlet，而HttpServlet又继承于另一个抽象类GenericServlet，这个抽象类实现了Servlet接口，最终点进去Servlet接口时，可以看到有5个方法：</p>
+<p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/180323/mHlm1h8JDA.png?imageslim" alt="mark"></p>
+<p>其中init(),service(),destory()这三个方法和Servlet的生命周期相关。</p>
+<p>Web容器加载Servlet并将其实例化后，Servlet生命周期开始，容器运行其init()方法进行Servlet的初始化；请求到达时调用Servlet的service()方法，service()方法会根据需要调用与请求对应的doGet或doPost等方法；当服务器关闭或项目被卸载时服务器会将Servlet实例销毁，此时会调用Servlet的destroy()方法。</p>
+<h3 id="3-转发-forward-和重定向-redirect-的区别"><a href="#3-转发-forward-和重定向-redirect-的区别" class="headerlink" title="3. 转发(forward)和重定向(redirect)的区别?"></a>3. 转发(forward)和重定向(redirect)的区别?</h3><p>新建HelloServlet，对应/hello，以转发的方式跳到hello.jsp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">request.getRequestDispatcher(&quot;/hello.jsp&quot;).forward(req,resp);</div></pre></td></tr></table></figure></p>
+<p>新建LoginServlet，对应/login，以重定向的方式跳到login.jsp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">response.sendRedirect(&quot;/login.jsp&quot;);</div></pre></td></tr></table></figure></p>
+<p>当你在浏览器分别输入localhost:8080/login和localhost:8080/hello的时候，都跳转到对应的页面了，但会发现/hello还是/hello，而/login变成了/login.jsp.</p>
+<p>forward是服务器请求资源，服务器访问目标地址URL，把响应内容读取过来，然后把这些内容发给浏览器，浏览器不知道服务器发送的内容是哪里来的，所以地址栏还是原来的地址。</p>
+<p>redirect是服务器发送状态码，告诉浏览器重新去请求哪个地址，因此地址栏可以看到跳转后的链接地址。</p>
+<p>显然，redirect无法获取被服务器保护起来的资源，但可以redirect到其他网站。而forward更加高效，并且forward可以将原来请求的request和response请求带过去。</p>
+<h3 id="4-服务器收到提交的表单数据，到底是调用Servlet的doGet-还是doPost-方法？"><a href="#4-服务器收到提交的表单数据，到底是调用Servlet的doGet-还是doPost-方法？" class="headerlink" title="4. 服务器收到提交的表单数据，到底是调用Servlet的doGet()还是doPost()方法？"></a>4. 服务器收到提交的表单数据，到底是调用Servlet的doGet()还是doPost()方法？</h3><p>html中的<form>元素有一个method属性来指定提交表单的方式，其值可以是get或post。当我们新建一个Servlet文件时，一般情况是重写doGet或doPost方法，也可以用service方法代替这两个方法。</form></p>
+<h3 id="5-Servlet中如何获取用户提交的查询参数或表单数据"><a href="#5-Servlet中如何获取用户提交的查询参数或表单数据" class="headerlink" title="5. Servlet中如何获取用户提交的查询参数或表单数据"></a>5. Servlet中如何获取用户提交的查询参数或表单数据</h3><p>通过HttpServletRequest对象的getParameter(“”)方法传入参数名获得参数值;<br>如果有包含多个值的参数，如复选框，可以通过请求对象的getParameterValues(“”);<br>也可以通过getParameterMap()获得键值对的映射。</p>
+<h3 id="6-Servlet中如何获取用户配置的初始化参数以及服务器上下文参数？"><a href="#6-Servlet中如何获取用户配置的初始化参数以及服务器上下文参数？" class="headerlink" title="6. Servlet中如何获取用户配置的初始化参数以及服务器上下文参数？"></a>6. Servlet中如何获取用户配置的初始化参数以及服务器上下文参数？</h3><p>有两种方法，如下图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@WebServlet(&quot;/login&quot;)</div><div class="line">public class LoginServlet extends HttpServlet &#123;</div><div class="line">    @Override</div><div class="line">    public void init(ServletConfig config) throws ServletException &#123;</div><div class="line">        //1.</div><div class="line">        config.getInitParameter(&quot;&quot;);</div><div class="line">        //2.</div><div class="line">        ServletContext context = config.getServletContext();</div><div class="line">        context.getInitParameter(&quot;&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>ServletContext还可以通过request对象获得：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</div><div class="line">    ServletContext context = req.getServletContext();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="7-如何设置请求的编码及响应内容的类型？"><a href="#7-如何设置请求的编码及响应内容的类型？" class="headerlink" title="7. 如何设置请求的编码及响应内容的类型？"></a>7. 如何设置请求的编码及响应内容的类型？</h3><ul>
+<li><p>设置请求：<br>请求对象（ServletRequest）的setCharacterEncoding(String)方法可以设置请求的编码</p>
+</li>
+<li><p>设置响应：<br>通过响应对象（ServletResponse）的setContentType(String)方法可以设置响应内容的类型；<br>也可以通过HttpServletResponsed对象的setHeader(String, String)方法来设置。</p>
+<p>  要彻底解决乱码问题就应该让页面、服务器、请求和响应、Java程序都使用统一的编码，最好的选择当然是UTF-8。</p>
+</li>
+</ul>
+<h2 id="Jsp"><a href="#Jsp" class="headerlink" title="Jsp"></a>Jsp</h2><p>第一次请求一个Jsp页面时，Servlet/Jsp容器首先会把JSP页面转成一个Jsp类，这个类实现的接口也是Servlet的子接口，因此Jsp其实就是一个Servlet，对于同一个Jsp页面的后续请求，如果Jsp页面未修改，则直接返回内存中已存在的Servlet实例，否则，重新转换编译并执行。</p>
+<h3 id="1-Jsp有哪些内置对象？"><a href="#1-Jsp有哪些内置对象？" class="headerlink" title="1. Jsp有哪些内置对象？"></a>1. Jsp有哪些内置对象？</h3><p>9个内置对象：</p>
+<ul>
+<li>request：封装客户端的请求，其中包含来自GET或POST请求的参数； </li>
+<li>response：封装服务器对客户端的响应； </li>
+<li>pageContext：通过该对象可以获取其他对象； </li>
+<li>session：封装用户会话的对象； </li>
+<li>application：封装服务器运行环境的对象； </li>
+<li>out：输出服务器响应的输出流对象； </li>
+<li>config：Web应用的配置对象； </li>
+<li>page：JSP页面本身（相当于Java程序中的this）； </li>
+<li>exception：封装页面抛出异常的对象。</li>
+</ul>
+<h3 id="2-jsp和servelt的关系"><a href="#2-jsp和servelt的关系" class="headerlink" title="2. jsp和servelt的关系"></a>2. jsp和servelt的关系</h3><p>Servlet是一个特殊的Java程序，它运行于服务器的JVM中，能够依靠服务器的支持向浏览器提供显示内容。JSP本质上是Servlet的一种简易形式，JSP会被服务器处理成一个类似于Servlet的Java程序，可以简化页面内容的生成。Servlet和JSP最主要的不同点在于，Servlet的应用逻辑是在Java文件中，并且完全从表示层中的HTML分离开来。而JSP的情况是Java和HTML可以组合成一个扩展名为.jsp的文件。</p>
+<p>JSP侧重于视图，Servlet更侧重于控制逻辑，在MVC架构模式中，JSP适合充当视图（view）而Servlet适合充当控制器（controller）。</p>
+<h3 id="3-jsp中的四种作用域"><a href="#3-jsp中的四种作用域" class="headerlink" title="3. jsp中的四种作用域"></a>3. jsp中的四种作用域</h3><p>page、request、response、application</p>
+<ul>
+<li><p>page代表与一个页面相关的对象和属性。 </p>
+</li>
+<li><p>request代表与Web客户机发出的一个请求相关的对象和属性。<br>一个请求可能跨越多个页面，涉及多个Web组件；需要在页面显示的临时数据可以置于此作用域。 </p>
+</li>
+<li><p>session代表与某个用户与服务器建立的一次会话相关的对象和属性。<br>跟某个用户相关的数据应该放在用户自己的session中。 </p>
+</li>
+<li><p>application代表与整个Web应用程序相关的对象和属性。<br>它实质上是跨越整个Web应用程序，包括多个页面、请求和会话的一个全局作用域。</p>
+</li>
+</ul>
+<h3 id="4-如何自定义JSP标签"><a href="#4-如何自定义JSP标签" class="headerlink" title="4. 如何自定义JSP标签?"></a>4. 如何自定义JSP标签?</h3><ul>
+<li><p>编写一个Java类实现实现Tag/BodyTag/IterationTag接口（开发中通常不直接实现这些接口而是继承TagSupport/BodyTagSupport/SimpleTagSupport类，这是对缺省适配模式的应用），重写doStartTag()、doEndTag()等方法，定义标签要完成的功能；</p>
+</li>
+<li><p>编写扩展名为tld的标签描述文件对自定义标签进行部署，tld文件通常放在WEB-INF文件夹下或其子目录中；</p>
+</li>
+<li><p>在JSP页面中使用taglib指令引用该标签库。</p>
+</li>
+</ul>
+<h3 id="5-jsp静态包含和动态包含的区别"><a href="#5-jsp静态包含和动态包含的区别" class="headerlink" title="5. jsp静态包含和动态包含的区别"></a>5. jsp静态包含和动态包含的区别</h3><p>静态包含是通过JSP的include指令包含页面，动态包含是通过JSP标准动作<jsp:forward>包含页面。</jsp:forward></p>
+<ul>
+<li><p>静态包含是编译时包含，如果包含的页面不存在则会产生编译错误，而且两个页面的”contentType”属性应保持一致，因为两个页面会合二为一，只产生一个class文件，因此被包含页面发生的变动再包含它的页面更新前不会得到更新。</p>
+</li>
+<li><p>动态包含是运行时包含，可以向被包含的页面传递参数，包含页面和被包含页面是独立的，会编译出两个class文件，如果被包含的页面不存在，不会产生编译错误，也不影响页面其他部分的执行。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;%-- 静态包含 --%&gt;</div><div class="line">&lt;%@ include file=&quot;...&quot; %&gt;</div><div class="line"></div><div class="line">&lt;%-- 动态包含 --%&gt;</div><div class="line">&lt;jsp:include page=&quot;...&quot;&gt;</div><div class="line">    &lt;jsp:param name=&quot;...&quot; value=&quot;...&quot; /&gt;</div><div class="line">&lt;/jsp:include&gt;</div></pre></td></tr></table></figure>
+<h2 id="JSTL"><a href="#JSTL" class="headerlink" title="JSTL"></a>JSTL</h2><h3 id="1-你的项目中使用了哪些JSTL标签？"><a href="#1-你的项目中使用了哪些JSTL标签？" class="headerlink" title="1. 你的项目中使用了哪些JSTL标签？"></a>1. 你的项目中使用了哪些JSTL标签？</h3><p>JSTL标签库提供了core、sql、fmt、xml等标签库，但是实际开发中建议只使用核心标签库(core)，而且只使用分支和循环标签并辅以表达式语言(EL).<br>循环标签：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;c:forEach&gt;</div></pre></td></tr></table></figure></p>
+<p>分支标签：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;c:if&gt;</div><div class="line">&lt;c:choose&gt;</div><div class="line">&lt;c:when&gt;</div><div class="line">&lt;c:otherwise&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="2-使用标签库的好处？"><a href="#2-使用标签库的好处？" class="headerlink" title="2. 使用标签库的好处？"></a>2. 使用标签库的好处？</h3><ul>
+<li>分离JSP页面的内容和逻辑，简化了Web开发； </li>
+<li>开发者可以创建自定义标签来封装业务逻辑和显示逻辑； </li>
+<li>标签具有很好的可移植性、可维护性和可重用性； </li>
+<li>避免了对Scriptlet（小脚本）的使用</li>
+</ul>
+<h2 id="EL"><a href="#EL" class="headerlink" title="EL"></a>EL</h2><h3 id="1-说一下表达式语言-EL-的隐式对象及其作用"><a href="#1-说一下表达式语言-EL-的隐式对象及其作用" class="headerlink" title="1. 说一下表达式语言(EL)的隐式对象及其作用"></a>1. 说一下表达式语言(EL)的隐式对象及其作用</h3><ul>
+<li>pageContext</li>
+<li>initParam：访问上下文参数</li>
+<li>param：访问请求参数</li>
+<li>paramValues</li>
+<li>header：访问请求头</li>
+<li>headerValues</li>
+<li>cookie：访问cookie</li>
+<li>applicationScope：访问application作用域</li>
+<li>sessionScope：访问session作用域</li>
+<li>requestScope：访问request作用域</li>
+<li>pageScope：访问page作用域</li>
+</ul>
+<p>用法如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$&#123;pageContext.request.method&#125;</div><div class="line">$&#123;pageContext[&quot;request&quot;][&quot;method&quot;]&#125;</div><div class="line">$&#123;pageContext.request[&quot;method&quot;]&#125;</div><div class="line">$&#123;pageContext[&quot;request&quot;].method&#125;</div><div class="line">$&#123;initParam.defaultEncoding&#125;</div><div class="line">$&#123;header[&quot;accept-language&quot;]&#125;</div><div class="line">$&#123;headerValues[&quot;accept-language&quot;][0]&#125;</div><div class="line">$&#123;cookie.jsessionid.value&#125;</div><div class="line">$&#123;sessionScope.loginUser.username&#125;</div></pre></td></tr></table></figure></p>
+<pre><code>表达式语言的.和[]运算作用是一致的，唯一的差别在于如果访问的属性名不符合Java标识符命名规则，例如上面的accept-language就不是一个有效的Java标识符，那么这时候就只能用[]运算符而不能使用.运算符获取它的值。
+</code></pre><h3 id="2-EL支持哪些运算符"><a href="#2-EL支持哪些运算符" class="headerlink" title="2. EL支持哪些运算符"></a>2. EL支持哪些运算符</h3><p>除了.和[]运算符，EL还提供了： </p>
+<ul>
+<li>算术运算符：+、-、*、/或div、%或mod </li>
+<li>关系运算符：==或eq、!=或ne、&gt;或gt、&gt;=或ge、&lt;或lt、&lt;=或le </li>
+<li>逻辑运算符：&amp;&amp;或and、||或or、!或not </li>
+<li>条件运算符：${statement? A : B}（跟Java的条件运算符类似） </li>
+<li>empty运算符：检查一个值是否为null或者空（数组长度为0或集合中没有元素也返回true）</li>
+</ul>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><h3 id="1-过滤器有哪些作用和用法？"><a href="#1-过滤器有哪些作用和用法？" class="headerlink" title="1. 过滤器有哪些作用和用法？"></a>1. 过滤器有哪些作用和用法？</h3><p>对Web应用来说，过滤器是一个驻留在服务器端的web组件，它可以截取客户端和服务器之间的请求和响应信息，并对这些信息进行过滤。<br>当Web容器接受到一个对资源的请求的时候，它将判断是否有过滤器与这个资源相关联。如果有，那么容器把请求交给过滤器处理。在过滤器中，可以改变请求的内容，或重新设置请求的报头信息，然后再把请求发送给目标资源。<br>当目标资源对请求做出相应的时候，容器同样将响应先转发给过滤器，在过滤器中你可以对响应内容进行转换，然后再将响应发送到客户端。</p>
+<pre><code>过滤器常见的用途：
+对用户请求进行统一认证、对用户访问请求进行记录和审核、对用户发送的数据进行过滤和替换、转换图像格式、对响应内容进行压缩、对请求或响应进行加解密处理....
+和过滤器有关的接口主要有：Filter、FilterConfig、FilterChain
+</code></pre><h2 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h2><h3 id="1-监听器有哪些作用和用法"><a href="#1-监听器有哪些作用和用法" class="headerlink" title="1. 监听器有哪些作用和用法"></a>1. 监听器有哪些作用和用法</h3><p>java web中的监听器就是application、session、request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件，如下所示：</p>
+<ul>
+<li>ServletContextListener：对Servlet上下文的创建和销毁进行监听。 </li>
+<li><p>ServletContextAttributeListener：监听Servlet上下文属性的添加、删除和替换。 </p>
+</li>
+<li><p>HttpSessionListener：对Session的创建和销毁进行监听。</p>
+</li>
+<li><p>HttpSessionAttributeListener：对Session对象中属性的添加、删除和替换进行监听。 </p>
+<p>  session的销毁有两种情况：<br>  1) session超时（可以在web.xml中通过<session-config>/<session-timeout>标签配置超时时间）；<br>  2) 通过调用session对象的invalidate()方法使session失效。</session-timeout></session-config></p>
+</li>
+<li><p>ServletRequestListener：对请求对象的初始化和销毁进行监听。 </p>
+</li>
+<li>ServletRequestAttributeListener：对请求对象属性的添加、删除和替换进行监听。</li>
+</ul>
+<h2 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a>web.xml</h2><h3 id="1-web-xml中可以配置哪些内容？"><a href="#1-web-xml中可以配置哪些内容？" class="headerlink" title="1. web.xml中可以配置哪些内容？"></a>1. web.xml中可以配置哪些内容？</h3><p>web.xml用于配置Web应用的相关信息，如：监听器、过滤器、Servlet、相关参数、会话超时时间、安全验证方式、错误页面等，下面是常见的一些配置：</p>
+<p>配置Spring上下文加载监听器加载Spring配置文件并创建IoC容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;context-param&gt;</div><div class="line">    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">   &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;</div><div class="line"> &lt;/context-param&gt;</div><div class="line"></div><div class="line"> &lt;listener&gt;</div><div class="line">    &lt;listener-class&gt;</div><div class="line">      org.springframework.web.context.ContextLoaderListener</div><div class="line">    &lt;/listener-class&gt;</div><div class="line"> &lt;/listener&gt;</div></pre></td></tr></table></figure>
+<p>配置Spring的OpenSessionInView过滤器来解决延迟加载和Hibernate会话关闭的矛盾：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">      &lt;filter-name&gt;openSessionInView&lt;/filter-name&gt;</div><div class="line">      &lt;filter-class&gt;</div><div class="line">         org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</div><div class="line">      &lt;/filter-class&gt;</div><div class="line">  &lt;/filter&gt;</div><div class="line"></div><div class="line">  &lt;filter-mapping&gt;</div><div class="line">      &lt;filter-name&gt;openSessionInView&lt;/filter-name&gt;</div><div class="line">      &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">  &lt;/filter-mapping&gt;</div></pre></td></tr></table></figure></p>
+<p>配置会话超时时间为10分钟：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;session-config&gt;</div><div class="line">      &lt;session-timeout&gt;10&lt;/session-timeout&gt;</div><div class="line">&lt;/session-config&gt;</div></pre></td></tr></table></figure></p>
+<p>配置404和Exception的错误页面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;error-page&gt;</div><div class="line">      &lt;error-code&gt;404&lt;/error-code&gt;</div><div class="line">      &lt;location&gt;/error.jsp&lt;/location&gt;</div><div class="line">  &lt;/error-page&gt;</div><div class="line"></div><div class="line">  &lt;error-page&gt;</div><div class="line">      &lt;exception-type&gt;java.lang.Exception&lt;/exception-type&gt;</div><div class="line">      &lt;location&gt;/error.jsp&lt;/location&gt;</div><div class="line">  &lt;/error-page&gt;</div></pre></td></tr></table></figure></p>
+<p>配置安全认证方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;security-constraint&gt;</div><div class="line">      &lt;web-resource-collection&gt;</div><div class="line">          &lt;web-resource-name&gt;ProtectedArea&lt;/web-resource-name&gt;</div><div class="line">          &lt;url-pattern&gt;/admin/*&lt;/url-pattern&gt;</div><div class="line">          &lt;http-method&gt;GET&lt;/http-method&gt;</div><div class="line">          &lt;http-method&gt;POST&lt;/http-method&gt;</div><div class="line">      &lt;/web-resource-collection&gt;</div><div class="line">      &lt;auth-constraint&gt;</div><div class="line">          &lt;role-name&gt;admin&lt;/role-name&gt;</div><div class="line">      &lt;/auth-constraint&gt;</div><div class="line">  &lt;/security-constraint&gt;</div><div class="line"></div><div class="line">  &lt;login-config&gt;</div><div class="line">      &lt;auth-method&gt;BASIC&lt;/auth-method&gt;</div><div class="line">  &lt;/login-config&gt;</div><div class="line"></div><div class="line">  &lt;security-role&gt;</div><div class="line">      &lt;role-name&gt;admin&lt;/role-name&gt;</div><div class="line">  &lt;/security-role&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="文件上传和下载"><a href="#文件上传和下载" class="headerlink" title="文件上传和下载"></a>文件上传和下载</h2><p>上传页面的upload.jsp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;form action=&quot;upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</div><div class="line">  文件：&lt;input type=&quot;file&quot; name=&quot;photo&quot;/&gt;</div><div class="line">  &lt;input type=&quot;submit&quot; value=&quot;上传&quot;/&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure></p>
+<p>支持上传的Servlet<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Part part = request.getPart(&quot;photo&quot;);</div><div class="line">if (part != null &amp;&amp; part.getSubmittedFileName().length() &gt; 0)&#123;</div><div class="line">     // 用ServletContext对象的getRealPath()方法获得上传文件夹的绝对路径</div><div class="line">    String savePath = request.getServletContext().getRealPath(&quot;/upload&quot;);</div><div class="line">    part.write(savePath + &quot;/&quot; + part.getSubmittedFileName());</div><div class="line"></div><div class="line">    request.setAttribute(&quot;hint&quot;, &quot;上传成功！&quot;);</div><div class="line">&#125;else &#123;</div><div class="line">    request.setAttribute(&quot;hint&quot;,&quot;上传失败！&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">request.getRequestDispatcher(&quot;index.jsp&quot;).forward(request,response);</div></pre></td></tr></table></figure></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="1-get请求和post请求的区别？"><a href="#1-get请求和post请求的区别？" class="headerlink" title="1. get请求和post请求的区别？"></a>1. get请求和post请求的区别？</h3><ul>
+<li>get请求用来从服务器上获得资源，而post是用来向服务器提交数据； </li>
+<li>get将表单中数据按照name=value的形式，添加到action 所指向的URL 后面，并且两者使用”?”连接，而各个变量之间使用”&amp;”连接；post是将表单中的数据放在HTTP协议的请求头或消息体中，传递到action所指向URL； </li>
+<li>get传输的数据要受到URL长度限制（1024字节）；而post可以传输大量的数据，上传文件通常要使用post方式； </li>
+<li>使用get时参数会显示在地址栏上，如果这些数据不是敏感数据，那么可以使用get；对于敏感数据还是应用使用post； </li>
+<li>get使用MIME类型application/x-www-form-urlencoded的URL编码（也叫百分号编码）文本的格式传递参数，保证被传送的参数由遵循规范的文本组成，例如一个空格的编码是”%20”。</li>
+</ul>
+<h3 id="2-常见的Web服务器有哪些"><a href="#2-常见的Web服务器有哪些" class="headerlink" title="2. 常见的Web服务器有哪些"></a>2. 常见的Web服务器有哪些</h3><p>Apache、Tomcat、IIS、Nginx…</p>
+<h3 id="3-实现会话跟踪的技术有哪些？"><a href="#3-实现会话跟踪的技术有哪些？" class="headerlink" title="3. 实现会话跟踪的技术有哪些？"></a>3. 实现会话跟踪的技术有哪些？</h3><p>主流方式有cookie和session两种：<br>cookie：<br>cookie有两种：<br>一种是基于窗口的，浏览器窗口关闭后，cookie就没有了；一种是将信息存储在一个临时文件中，并设置存在的时间。</p>
+<p>当用户通过浏览器和服务器建立一次会话后，会话ID就会随响应信息返回存储在基于窗口的cookie中，那就意味着只要浏览器没有关闭，会话没有超时，下一次请求时这个会话ID又会提交给服务器让服务器识别用户身份。会话中可以为用户保存信息。会话对象是在服务器内存中的，而基于窗口的cookie是在客户端内存中的。如果浏览器禁用了cookie，那么就需要通过下面两种方式进行会话跟踪。当然，在使用cookie时要注意几点：首先不要在cookie中存放敏感信息；其次cookie存储的数据量有限（4k），不能将过多的内容存储cookie中；再者浏览器通常只允许一个站点最多存放20个cookie。当然，和用户会话相关的其他信息（除了会话ID）也可以存在cookie方便进行会话跟踪。 </p>
+<p>HttpSession：<br>在所有会话跟踪技术中，HttpSession对象是最强大也是功能最多的。当一个用户第一次访问某个网站时会自动创建HttpSession，每个用户可以访问他自己的HttpSession。可以通过HttpServletRequest对象的getSession方法获得HttpSession，通过HttpSession的setAttribute方法可以将一个值放在HttpSession中，通过调用HttpSession对象的getAttribute方法，同时传入属性名就可以获取保存在HttpSession中的对象。与上面三种方式不同的是，HttpSession放在服务器的内存中，因此不要将过大的对象放在里面，即使目前的Servlet容器可以在内存将满时将HttpSession中的对象移到其他存储设备中，但是这样势必影响性能。添加到HttpSession中的值可以是任意Java对象，这个对象最好实现了Serializable接口，这样Servlet容器在必要的时候可以将其序列化到文件中，否则在序列化时就会出现异常。</p>
+<h3 id="4-java-web开发中的Model-1-和-Model-2-分别指的是什么？"><a href="#4-java-web开发中的Model-1-和-Model-2-分别指的是什么？" class="headerlink" title="4. java web开发中的Model 1 和 Model 2 分别指的是什么？"></a>4. java web开发中的Model 1 和 Model 2 分别指的是什么？</h3><p>Model 1是以页面为中心的Java Web开发，使用JSP+JavaBean技术将页面显示逻辑和业务逻辑处理分开，JSP实现页面显示，JavaBean对象用来保存数据和实现业务逻辑。</p>
+<p>Model 2是基于MVC（模型-视图-控制器，Model-View-Controller）架构模式的开发模型，实现了模型和视图的彻底分离，利于团队开发和代码复用。</p>
+<h3 id="5-解释一下网络应用的模式和特点"><a href="#5-解释一下网络应用的模式和特点" class="headerlink" title="5. 解释一下网络应用的模式和特点"></a>5. 解释一下网络应用的模式和特点</h3><p>大致分三类：B/S、C/S、P2P</p>
+<h2 id="Web-Service"><a href="#Web-Service" class="headerlink" title="Web Service"></a>Web Service</h2><h3 id="1-什么是Web-Service"><a href="#1-什么是Web-Service" class="headerlink" title="1. 什么是Web Service?"></a>1. 什么是Web Service?</h3><p>Web Service就是一个应用程序，它向外界暴露出一个能够通过Web进行调用的API。这就是说，你能够用编程的方法透明的调用这个应用程序，不需要了解它的任何细节，跟你使用的编程语言也没有关系。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mysea.github.io/2018/03/22/java基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sea">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sea.online">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/22/java基础/" itemprop="url">java基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T17:24:06+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试准备/" itemprop="url" rel="index">
+                    <span itemprop="name">面试准备</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="1-String是基本数据类型吗？"><a href="#1-String是基本数据类型吗？" class="headerlink" title="1. String是基本数据类型吗？"></a>1. String是基本数据类型吗？</h3><p>java基本类型有8个：<br>byte、short、int、long、float、double、char、boolean<br>除了基本类型其他都是引用类型</p>
+<h3 id="2-单精度和双精度"><a href="#2-单精度和双精度" class="headerlink" title="2. 单精度和双精度"></a>2. 单精度和双精度</h3><p>java中所有的小数都是双精度的，也就是double类型，如果要将一个小数定义成单精度的必须在后面加上f或者F，双精度存储的位数要比单精度的多</p>
+<h3 id="3-short-s1-1；s1-s1-1-和-s1-1哪个正确？"><a href="#3-short-s1-1；s1-s1-1-和-s1-1哪个正确？" class="headerlink" title="3. short s1=1；s1=s1+1 和 s1+=1哪个正确？"></a>3. short s1=1；s1=s1+1 和 s1+=1哪个正确？</h3><p>前者错误，1是整型，赋给short会损失精度，后者正确因为隐含了强制类型转换</p>
+<h3 id="4-int和Integer"><a href="#4-int和Integer" class="headerlink" title="4. int和Integer"></a>4. int和Integer</h3><p>java为每一个基本类型引入了对应的包装类型:</p>
+<ul>
+<li>原始类型: boolean，char，byte，short，int，long，float，double </li>
+<li>包装类型：Boolean，Character，Byte，Short，Integer，Long，Float，Double</li>
+</ul>
+<p>int的包装类就是Integer，java有自动装箱、拆箱机制，两者可以相互转换，譬如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Integer a = 3;</div><div class="line">int b = 3;</div><div class="line">a == b //为true</div></pre></td></tr></table></figure></p>
+<p>因为a会自动拆箱成int类型再比较，但是注意：<br>两个Integer对象比较时,如果是==比较（比较的是引用）：<br>当我们给一个Integer对象赋一个int值的时候，整型字面量的值在-128到127之间，那么不会new新的Integer对象，而是直接引用常量池中的Integer对象</p>
+<h3 id="5-amp-和-amp-amp"><a href="#5-amp-和-amp-amp" class="headerlink" title="5. &amp; 和 &amp;&amp;"></a>5. &amp; 和 &amp;&amp;</h3><p>逻辑与和短路与的区别，两者都是两边为true时结果为true，但短路与左边为false时，不会比较右边而直接返回false<br>请体会：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">username != null &amp;&amp; !username.equals(&quot;&quot;)</div></pre></td></tr></table></figure></p>
+<p>注意两者顺序不能掉反</p>
+<h3 id="6-Math中的取整方法"><a href="#6-Math中的取整方法" class="headerlink" title="6. Math中的取整方法"></a>6. Math中的取整方法</h3><p>ceil：向上取整，加1去掉小数<br>floor：向下取整，直接去掉小数<br>round：加0.5再向下取整</p>
+<h3 id="7-switch-中的参数可以为String吗？"><a href="#7-switch-中的参数可以为String吗？" class="headerlink" title="7. switch()中的参数可以为String吗？"></a>7. switch()中的参数可以为String吗？</h3><p>可以，switch()中的参数可以是byte/short/char/int/String，但long不可以</p>
+<h3 id="8-如何最有效率的计算2的三次方？"><a href="#8-如何最有效率的计算2的三次方？" class="headerlink" title="8. 如何最有效率的计算2的三次方？"></a>8. 如何最有效率的计算2的三次方？</h3><p>2&lt;&lt;3，左移一位乘以2，右移一位除以2</p>
+<h3 id="9-数组中有没有length-方法？"><a href="#9-数组中有没有length-方法？" class="headerlink" title="9. 数组中有没有length()方法？"></a>9. 数组中有没有length()方法？</h3><p>数组中没有length()方法，但有length属性，String中有length()方法，会把字符串中的空格也算进去</p>
+<h3 id="10-如果x-equals-y-true，那么x和y的hashcode值一定相同，反之不成立"><a href="#10-如果x-equals-y-true，那么x和y的hashcode值一定相同，反之不成立" class="headerlink" title="10. 如果x.equals(y) == true，那么x和y的hashcode值一定相同，反之不成立"></a>10. 如果x.equals(y) == true，那么x和y的hashcode值一定相同，反之不成立</h3><h3 id="11-java平台提供几种类型的字符串？"><a href="#11-java平台提供几种类型的字符串？" class="headerlink" title="11. java平台提供几种类型的字符串？"></a>11. java平台提供几种类型的字符串？</h3><p>java平台提供两种类型的字符串：String、StringBuffer/StringBuilder。<br>String引用的字符串是不能被改变的；<br>StringBuffer/StrignBuilder类表示的字符串对象可以直接修改，但StringBuilder在单线程环境下使用，因此效率比StringBuffer高</p>
+<ol>
+<li>String对象的intern方法会得到字符串对象在常量池中对应的版本的引用（如果常量池中有一个字符串与String对象的equals结果是true），如果常量池中没有对应的字符串，则该字符串将被添加到常量池中，然后返回常量池中字符串的引用</li>
+<li>字符串的+操作其本质是创建了StringBuilder对象进行append操作，然后将拼接后的StringBuilder对象用toString方法处理成String对象</li>
+</ol>
+<h3 id="12-char型变量中能不能存储一个中文汉字？"><a href="#12-char型变量中能不能存储一个中文汉字？" class="headerlink" title="12. char型变量中能不能存储一个中文汉字？"></a>12. char型变量中能不能存储一个中文汉字？</h3><p>能，java中使用unicode编码（不选择特定的编码，直接使用字符在字符集中的编号）<br>一个char字符占2个字节（16比特）</p>
+<h3 id="13-String-s-new-String-“xyz”-创建了几个字符串对象"><a href="#13-String-s-new-String-“xyz”-创建了几个字符串对象" class="headerlink" title="13. String s = new String(“xyz”);创建了几个字符串对象?"></a>13. String s = new String(“xyz”);创建了几个字符串对象?</h3><p>两个，一个是静态区的”xyz”，一个是用new创建在堆上的对象</p>
+<h3 id="14-数据类型之间的转换"><a href="#14-数据类型之间的转换" class="headerlink" title="14. 数据类型之间的转换"></a>14. 数据类型之间的转换</h3><p>字符串—&gt;基本数据类型：<br>对应包装类的parseXXX(String)或valueOf(String)</p>
+<p>字符串&lt;—基本数据类型：<br>+””或者调用String类中的valueOf()方法返回相应字符串或者toString方法</p>
+<h3 id="15-用递归实现字符串的反转和替换"><a href="#15-用递归实现字符串的反转和替换" class="headerlink" title="15. 用递归实现字符串的反转和替换"></a>15. 用递归实现字符串的反转和替换</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public static String reverse(String originStr)&#123;</div><div class="line">        if (originStr == null || originStr.length() &lt;= 1)</div><div class="line">            return originStr;</div><div class="line">        return reverse(originStr.substring(1))+ originStr.charAt(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="16-如何将GB2312编码的字符转换为ISO-8859-1编码的字符串"><a href="#16-如何将GB2312编码的字符转换为ISO-8859-1编码的字符串" class="headerlink" title="16. 如何将GB2312编码的字符转换为ISO-8859-1编码的字符串"></a>16. 如何将GB2312编码的字符转换为ISO-8859-1编码的字符串</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new String(&quot;您好&quot;.getBytes(&quot;GB2312&quot;), &quot;ISO-8859-1&quot;);</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="日期和时间"><a href="#日期和时间" class="headerlink" title="日期和时间"></a>日期和时间</h2><h3 id="1-如何取得年月日时分秒"><a href="#1-如何取得年月日时分秒" class="headerlink" title="1. 如何取得年月日时分秒"></a>1. 如何取得年月日时分秒</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">LocalDateTime dt = LocalDateTime.now();</div><div class="line">dt.getYear());</div><div class="line">dt.getMonthValue());</div><div class="line">dt.getDayOfMonth());</div><div class="line">dt.getDayOfWeek());</div><div class="line">dt.getDayOfYear());</div><div class="line">dt.getHour());</div><div class="line">dt.getMinute());</div><div class="line">dt.getSecond());</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Calendar cal = Calendar.getInstance();</div><div class="line">cal.get(Calendar.YEAR);</div><div class="line">cal.get(Calendar.MONTH);</div><div class="line">cal.get(Calendar.DATE);</div><div class="line">cal.get(Calendar.HOUR_OF_DAY);</div><div class="line">cal.get(Calendar.MINUTE);</div><div class="line">cal.get(Calendar.SECOND);</div></pre></td></tr></table></figure>
+<h3 id="2-如何取得取得从1970年1月1日0时0分0秒到现在的毫秒数"><a href="#2-如何取得取得从1970年1月1日0时0分0秒到现在的毫秒数" class="headerlink" title="2. 如何取得取得从1970年1月1日0时0分0秒到现在的毫秒数"></a>2. 如何取得取得从1970年1月1日0时0分0秒到现在的毫秒数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Calendar.getInstance().getTimeInMillis();</div><div class="line">System.currentTimeMillis();</div><div class="line">Clock.systemDefaultZone().millis();</div></pre></td></tr></table></figure>
+<h3 id="3-如何格式化日期"><a href="#3-如何格式化日期" class="headerlink" title="3. 如何格式化日期"></a>3. 如何格式化日期</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SimpleDateFormat old = new SimpleDateFormat(&quot;yyyy/MM/dd&quot;);</div><div class="line">Date date = new Date();</div><div class="line">old.format(date);</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DateTimeFormatter newFormat = DateTimeFormatter.ofPattern(&quot;yyyy/MM/dd&quot;);</div><div class="line">LocalDate date1 = LocalDate.now();</div><div class="line">date1.format(newFormat);</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="1-方法重载-vs-方法重写"><a href="#1-方法重载-vs-方法重写" class="headerlink" title="1. 方法重载 vs 方法重写"></a>1. 方法重载 vs 方法重写</h3><p>方法重载：<br>同一个类中定义了多个方法，方法名相同，而方法参数（类型和个数）、返回值不一定相同<br>根据传递时的参数个数和参数类型决定使用哪个方法</p>
+<p>方法重写（覆盖）：<br>在子类中定义某方法和父类的某个方法，方法名、方法参数（类型和个数）、返回值相同<br>如需要父类中的方法，可使用super关键字，该关键字引用了当前类的父类<br>子类函数的权限不能少于父类的<br>不能比父类重写方法声明更多的异常</p>
+<h3 id="2-访问修饰符"><a href="#2-访问修饰符" class="headerlink" title="2. 访问修饰符"></a>2. 访问修饰符</h3><p>public：当前类、同包、子类、其他包<br>protected：当前类、同包、子类<br>default：当前类、同包<br>private：当前类</p>
+<p>不写时默认为default<br>类修饰符只能是public或默认，方法修饰符可以是以上四种</p>
+<h3 id="3-内存中-栈、堆、方法区的区别"><a href="#3-内存中-栈、堆、方法区的区别" class="headerlink" title="3. 内存中 栈、堆、方法区的区别"></a>3. 内存中 栈、堆、方法区的区别</h3><p>栈：<br>定义一个基本数据类型的变量，一个对象的引用，还有就是函数调用的现场保存都使用JVM中的栈空间</p>
+<p>堆：<br>通过new关键字和构造器创建的对象则放在堆空间，堆是垃圾收集器管理的主要区域</p>
+<p>方法区：<br>程序中的字面量（literal）如直接书写的100、”hello”和常量都是放在常量池中，常量池是方法区的一部分</p>
+<p>栈空间用光了会引发StackOverflowError，而堆和常量池空间不足则会引发OutOfMemoryError</p>
+<h3 id="4-构造器不能被继承，因此无法重写，但可以重载"><a href="#4-构造器不能被继承，因此无法重写，但可以重载" class="headerlink" title="4. 构造器不能被继承，因此无法重写，但可以重载"></a>4. 构造器不能被继承，因此无法重写，但可以重载</h3><h3 id="5-String类是final类，不可以被继承，同理Integer等也不可以"><a href="#5-String类是final类，不可以被继承，同理Integer等也不可以" class="headerlink" title="5. String类是final类，不可以被继承，同理Integer等也不可以"></a>5. String类是final类，不可以被继承，同理Integer等也不可以</h3><h3 id="6-java的方法调用只支持参数的值传递"><a href="#6-java的方法调用只支持参数的值传递" class="headerlink" title="6. java的方法调用只支持参数的值传递"></a>6. java的方法调用只支持参数的值传递</h3><h3 id="7-为什么不能根据返回类型区分重载？"><a href="#7-为什么不能根据返回类型区分重载？" class="headerlink" title="7. 为什么不能根据返回类型区分重载？"></a>7. 为什么不能根据返回类型区分重载？</h3><p>因为java语言层面的方法特征签名 = 方法名 + 参数类型 + 参数顺序</p>
+<h3 id="8-抽象类和接口的异同"><a href="#8-抽象类和接口的异同" class="headerlink" title="8. 抽象类和接口的异同"></a>8. 抽象类和接口的异同</h3><p>都不能够实例化，但可以定义抽象类和接口的引用<br>一个类继承抽象类或实现接口，都需要对其中的抽象方法全部进行实现，否则该类需声明为抽象类<br>接口比抽象类更抽象，不能定义构造器，方法全部是抽象方法，而抽象类可以定义构造器，可以有抽象方法和具体方法<br>抽象类中的成员可以是private、default、protected、public，而接口中的成员全都是public<br>抽象类中可以定义成员变量，而接口定义的成员变量实际上都是常量<br>有抽象方法的类必须声明为抽象类，而抽象类未必要有抽象方法</p>
+<h3 id="9-静态类和内部类的不同"><a href="#9-静态类和内部类的不同" class="headerlink" title="9. 静态类和内部类的不同"></a>9. 静态类和内部类的不同</h3><p>内部类需要实例化外部类后才能实例化，静态类不需要依赖外部类示例</p>
+<h3 id="10-抽象的方法可以同时是-静态的static？-本地的native？-能被synchroized修饰？"><a href="#10-抽象的方法可以同时是-静态的static？-本地的native？-能被synchroized修饰？" class="headerlink" title="10. 抽象的方法可以同时是 静态的static？ 本地的native？ 能被synchroized修饰？"></a>10. 抽象的方法可以同时是 静态的static？ 本地的native？ 能被synchroized修饰？</h3><p>都不能。<br>抽象方法需要子类重写，静态方法不能被重写，矛盾<br>本地方法有本地代码实现，抽象方法没有实现，矛盾<br>synchroized和方法实现细节有关，抽象方法不涉及细节，矛盾</p>
+<h3 id="11-静态变量和实例变量的区别"><a href="#11-静态变量和实例变量的区别" class="headerlink" title="11. 静态变量和实例变量的区别"></a>11. 静态变量和实例变量的区别</h3><p>静态变量属于类，不属于类的任何一个对象，一个类不管创建多少个对象，静态变量在内存中只有一个拷贝<br>实例变量必须依赖某一实例，要先创建对象才能访问到它</p>
+<h3 id="12-如何实现克隆"><a href="#12-如何实现克隆" class="headerlink" title="12. 如何实现克隆"></a>12. 如何实现克隆</h3><p>实现Cloneable接口并重写clone()<br>实现Serializable接口，通过对象的序列化和反序列化实现克隆，可实现真正的深度克隆</p>
+<h3 id="13-接口可以继承接口，抽象类可以实现接口，抽象类也可以实现具体类"><a href="#13-接口可以继承接口，抽象类可以实现接口，抽象类也可以实现具体类" class="headerlink" title="13. 接口可以继承接口，抽象类可以实现接口，抽象类也可以实现具体类"></a>13. 接口可以继承接口，抽象类可以实现接口，抽象类也可以实现具体类</h3><h3 id="14-一个“-java”源文件中是否可以包含多个类？"><a href="#14-一个“-java”源文件中是否可以包含多个类？" class="headerlink" title="14. 一个“.java”源文件中是否可以包含多个类？"></a>14. 一个“.java”源文件中是否可以包含多个类？</h3><p>可以包含多个类，但只能有一个公开类，而且文件名和公开类的类名必须一致</p>
+<h3 id="15-匿名内部类是否可以继承其他类或实现其他接口？"><a href="#15-匿名内部类是否可以继承其他类或实现其他接口？" class="headerlink" title="15. 匿名内部类是否可以继承其他类或实现其他接口？"></a>15. 匿名内部类是否可以继承其他类或实现其他接口？</h3><p>可以</p>
+<h3 id="16-一个内部类可以引用包含它的类的成员吗"><a href="#16-一个内部类可以引用包含它的类的成员吗" class="headerlink" title="16. 一个内部类可以引用包含它的类的成员吗"></a>16. 一个内部类可以引用包含它的类的成员吗</h3><p>可以</p>
+<h3 id="17-java中final关键字有哪些用法"><a href="#17-java中final关键字有哪些用法" class="headerlink" title="17. java中final关键字有哪些用法"></a>17. java中final关键字有哪些用法</h3><p>修饰类：表示该类不能被继承<br>修饰方法：表示方法不能被重写<br>修饰变量：表示变量只能一次赋值后值不能被修改</p>
+<hr>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="1-List、Set、Map是否继承自Collection接口？"><a href="#1-List、Set、Map是否继承自Collection接口？" class="headerlink" title="1. List、Set、Map是否继承自Collection接口？"></a>1. List、Set、Map是否继承自Collection接口？</h3><p>List、Set是，Map不是，Map是键值对，Set是数学上的集合（不允许有重复的元素），List是线性结构容器，适用于用数值索引访问元素的情形</p>
+<h3 id="2-阐述ArrayList、Vector、LinkedList的存储性能和特性。"><a href="#2-阐述ArrayList、Vector、LinkedList的存储性能和特性。" class="headerlink" title="2. 阐述ArrayList、Vector、LinkedList的存储性能和特性。"></a>2. 阐述ArrayList、Vector、LinkedList的存储性能和特性。</h3><p>ArrayList和Vector都是使用数组方式存储数据，这个数组元素数大于实际存储的数据以便增加和插入元素，都允许直接按序号索引元素，但索引数据快而插入速度慢。<br>Vector中的方法大多有加synchronized修饰，所以是线程安全的，但性能上比ArrayList差<br>由于ArrayList和LinkedList都是非线程安全的，遇到多个线程操作同一个容器的时候可以通过工具类Collections的synchronizedList方法将其转换成线程安全的容器后再使用</p>
+<h3 id="3-Collection和Collections的区别？"><a href="#3-Collection和Collections的区别？" class="headerlink" title="3. Collection和Collections的区别？"></a>3. Collection和Collections的区别？</h3><p>Collection是一个接口，是Set/List等容器的父接口<br>Collections是一个工具类，提供一系列静态方法来辅助容器操作，包括对容器的搜索、排序、线程安全化等等</p>
+<h3 id="4-List、Map、Set三个接口存取元素时，各有什么特点？"><a href="#4-List、Map、Set三个接口存取元素时，各有什么特点？" class="headerlink" title="4. List、Map、Set三个接口存取元素时，各有什么特点？"></a>4. List、Map、Set三个接口存取元素时，各有什么特点？</h3><p>List以特定索引存取元素，可以有重复元素。<br>Set不能有重复元素<br>Map保存键值对的映射，可以一对一或多对一</p>
+<p>Set和Map都有基于哈希存储和排序树的两种实现版本<br>基于哈希的理论存取时间复杂度为O(1)<br>基于排序树版本的实现在插入和删除时按照元素或元素的键（key）构成排序树从而达到排序和去重的效果</p>
+<h3 id="5-TreeMap和TreeSet在排序时如何比较元素？Collections工具类的sort-方法如何比较元素？"><a href="#5-TreeMap和TreeSet在排序时如何比较元素？Collections工具类的sort-方法如何比较元素？" class="headerlink" title="5. TreeMap和TreeSet在排序时如何比较元素？Collections工具类的sort()方法如何比较元素？"></a>5. TreeMap和TreeSet在排序时如何比较元素？Collections工具类的sort()方法如何比较元素？</h3><p>TreeSet要求的对象所属的类必须实现Comparable接口，该接口提供了比较元素的compareTo()方法<br>插入元素时会回调该方法比较元素的大小</p>
+<p>TreeMap要求键实现Comparable接口</p>
+<p>Collections的sort方法有两种重载形式：<br>第一种方式要求传入的代排序的容器中的对象实现Comparable接口以实现元素的比较<br>第二种方式不要求容器中的元素可比较，但是传入的第二个参数是Comparator接口的子类型（里面重写compare方法实现元素的比较）</p>
+<hr>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h3 id="1-线程的基本状态及状态之间的关系"><a href="#1-线程的基本状态及状态之间的关系" class="headerlink" title="1. 线程的基本状态及状态之间的关系"></a>1. 线程的基本状态及状态之间的关系</h3><p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/180322/4K957bJA87.jpg?imageslim" alt="mark"></p>
+<p>其中Running表示运行状态，Runnable表示就绪状态（万事俱备，只欠CPU），Blocked表示阻塞状态，阻塞状态又有多种情况，可能是因为调用wait()方法进入等待池，也可能是执行同步方法或同步代码块进入等锁池，或者是调用了sleep()方法或join()方法等待休眠或其他线程结束，或是因为发生了I/O中断。</p>
+<h3 id="2-请说出与线程同步与线程调度相关的方法"><a href="#2-请说出与线程同步与线程调度相关的方法" class="headerlink" title="2. 请说出与线程同步与线程调度相关的方法"></a>2. 请说出与线程同步与线程调度相关的方法</h3><p>wait()：使一个线程处于等待（阻塞）状态，并释放所持有对象的锁<br>sleep()：使一个正在运行的线程处于睡眠状态，是一个静态方法，调用此方法需要处理InterruptException异常<br>notify()：唤醒一个处于等待状态的线程，并不能确定的唤醒某一个等待状态的线程，而是由JVM确定唤醒哪个线程，而且与优先级无关<br>notifyAll()：唤醒所有处于等待状态的线程，并不是将对象的锁给所有线程而是让它们竞争，只有获得锁的线程才能进入就绪状态</p>
+<h3 id="3-编写多线程程序的几种实现方式"><a href="#3-编写多线程程序的几种实现方式" class="headerlink" title="3. 编写多线程程序的几种实现方式"></a>3. 编写多线程程序的几种实现方式</h3><p>三种：<br>继承Thread类<br>实现Runnable接口<br>上述两种方法都要通过重写run()方法来定义线程的行为<br>实现Callable接口，该接口中的call方法可以在线程结束后产生一个返回值</p>
+<h3 id="4-synchronized关键字的用法"><a href="#4-synchronized关键字的用法" class="headerlink" title="4. synchronized关键字的用法"></a>4. synchronized关键字的用法</h3><p>synchronized关键字可以将对象或者方法标记为同步，以实现对对象和方法的互斥访问。可以用synchronized(对象){…}定义同步代码块，或者在声明方法时将synchronized作为方法的修饰符</p>
+<h3 id="5-同步和异步"><a href="#5-同步和异步" class="headerlink" title="5. 同步和异步"></a>5. 同步和异步</h3><p>如果系统中存在临界资源（资源数量少于竞争资源的线程数量的资源）,这些数据就必须进行同步存取</p>
+<p>当程序在对象上调用了一个需要花费很长时间来执行的方法，并且不希望让程序等待方法的返回时，就应该使用异步编程</p>
+<p>事实上，所谓同步就是阻塞式操作，异步就是非阻塞式操作。</p>
+<h3 id="6-启动一个线程是调用run-还是start-方法"><a href="#6-启动一个线程是调用run-还是start-方法" class="headerlink" title="6. 启动一个线程是调用run()还是start()方法"></a>6. 启动一个线程是调用run()还是start()方法</h3><p>启动一个线程是调用start()方法，使线程代表的虚拟处理机处于可运行状态，意味着它可以由JVM调度并执行，这并不意味着线程会立即运行。</p>
+<p>run()方法是线程启动后要进行回调的方法</p>
+<h3 id="7-什么是线程池？"><a href="#7-什么是线程池？" class="headerlink" title="7. 什么是线程池？"></a>7. 什么是线程池？</h3><p>面向对象编程中，创建和销毁对象是很费时间的，因为创建一个对象要获取内存资源或者其他更多资源。<br>所以为了提高效率，就要尽可能的减少创建和销毁对象的次数，特别是一些很耗资源的对象的创建和销毁<br>线程池顾名思义是事先创建若干个线程放到一个池（容器）中，需要的时候从池中获取线程而不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销</p>
+<h3 id="8-简述synchronized-和java-util-concurrent-locks-Lock的异同？"><a href="#8-简述synchronized-和java-util-concurrent-locks-Lock的异同？" class="headerlink" title="8. 简述synchronized 和java.util.concurrent.locks.Lock的异同？"></a>8. 简述synchronized 和java.util.concurrent.locks.Lock的异同？</h3><p>Lock能完成synchronized所实现的所有功能，但是Lock比synchronized更精确的线程语义和更好的性能，而且不强调一个要获得锁。<br>synchronized会自动释放锁，而Lock一定要求程序员手工释放，最好在finally块中释放</p>
+<hr>
+<h2 id="文件处理"><a href="#文件处理" class="headerlink" title="文件处理"></a>文件处理</h2><h3 id="1-java如何实现序列化？"><a href="#1-java如何实现序列化？" class="headerlink" title="1. java如何实现序列化？"></a>1. java如何实现序列化？</h3><p>序列化是一种用来处理对象流的机制，所谓对象流也就是将对象的内容进行流化。<br>可以将流化的对象进行读写操作，也可以将流化的对象传输与网络之间。<br>序列化是为了解决对象流读写操作时可能引发的问题</p>
+<p>实现序列化，需要让一个类实现Serializable接口，该接口是一个标示性接口，标注该类对象是可以被序列化的，然后使用一个输出流来构造一个对象输出流并通过writeObject(Object)方法就可以实现对象写出（即保存其状态）；<br>如果需要反序列化则可以用一个输入流建立对象输入流，然后通过readObject()方法从流中读取对象。</p>
+<p>序列化除了能够实现对象的持久化外还能够用于对象的深度克隆。</p>
+<h3 id="2-java中有几种类型的流？"><a href="#2-java中有几种类型的流？" class="headerlink" title="2. java中有几种类型的流？"></a>2. java中有几种类型的流？</h3><p>字节流和字符流。<br>字节流继承于InputStream、OutputStream，字符流继承于Reader、Writer<br>关于java的I/O需要注意两点：一是两种对称性（输入和输出、字节和字符的对称性）；二是两种设计模式适配器模式和装潢模式</p>
+<h3 id="3-写一个方法，输入一个文件名和一个字符串，统计这个字符串在这个文件中出现的次数"><a href="#3-写一个方法，输入一个文件名和一个字符串，统计这个字符串在这个文件中出现的次数" class="headerlink" title="3. 写一个方法，输入一个文件名和一个字符串，统计这个字符串在这个文件中出现的次数"></a>3. 写一个方法，输入一个文件名和一个字符串，统计这个字符串在这个文件中出现的次数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public static int countWordInFile(String filename, String word) throws IOException &#123;</div><div class="line">        int counter = 0;</div><div class="line">        try(FileReader fr = new FileReader(filename))&#123;</div><div class="line">            try(BufferedReader br = new BufferedReader(fr))&#123;</div><div class="line">                String line = null;</div><div class="line">                while ((line = br.readLine()) != null)&#123;</div><div class="line">                    int index = -1;</div><div class="line">                    while(line.length() &gt;= word.length() &amp;&amp; (index = line.indexOf(word)) &gt;= 0)&#123;</div><div class="line">                        counter++;</div><div class="line">                        line = line.substring(index + word.length());</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;catch (Exception e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        return counter;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-用java代码列出一个目录下的所有文件"><a href="#4-用java代码列出一个目录下的所有文件" class="headerlink" title="4. 用java代码列出一个目录下的所有文件"></a>4. 用java代码列出一个目录下的所有文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> public static void listDir(String dirName)&#123;</div><div class="line">        File file = new File(dirName);</div><div class="line">        for (File temp : file.listFiles()) &#123;</div><div class="line">            System.out.println(temp.getName());</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-复制文件"><a href="#5-复制文件" class="headerlink" title="5. 复制文件"></a>5. 复制文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static void fileCopy(String source, String target) throws IOException &#123;</div><div class="line">        try(InputStream in = new FileInputStream(source))&#123;</div><div class="line">            try(OutputStream out = new FileOutputStream(target))&#123;</div><div class="line">                byte[] buffer = new byte[4096];</div><div class="line">                int bytesToRead;</div><div class="line">                while ((bytesToRead = in.read(buffer)) != -1)&#123;</div><div class="line">                    out.write(buffer, 0, bytesToRead);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h3 id="1-error和exception的区别"><a href="#1-error和exception的区别" class="headerlink" title="1. error和exception的区别"></a>1. error和exception的区别</h3><p>错误表示程序不必处理的异常和系统级的错误，是一种不是不可能恢复但是很困难的情况下的严重问题，如内存溢出<br>异常表示需要捕捉或需要程序进行处理的异常，是一种设计或实现问题，表示程序运行正常从不会发生的情况</p>
+<h3 id="2-try-里有一个return语句，那紧跟在try后的finally-里的代码会不会被执行，什么时候被执行，在return前还是后"><a href="#2-try-里有一个return语句，那紧跟在try后的finally-里的代码会不会被执行，什么时候被执行，在return前还是后" class="headerlink" title="2. try{}里有一个return语句，那紧跟在try后的finally{}里的代码会不会被执行，什么时候被执行，在return前还是后"></a>2. try{}里有一个return语句，那紧跟在try后的finally{}里的代码会不会被执行，什么时候被执行，在return前还是后</h3><p>会，在return前</p>
+<h3 id="3-java中的语言如何进行异常处理，关键字：throws-throw-try-catch-finally分别如何使用"><a href="#3-java中的语言如何进行异常处理，关键字：throws-throw-try-catch-finally分别如何使用" class="headerlink" title="3. java中的语言如何进行异常处理，关键字：throws/throw/try/catch/finally分别如何使用"></a>3. java中的语言如何进行异常处理，关键字：throws/throw/try/catch/finally分别如何使用</h3><p>一般在try里执行程序，如果throw一个异常，就可以catch它，catch跟进try后面，用来指定要捕获的异常类型，finally确保代码不管发生什么都要被执行。try语句可以嵌套。throws声明各种异常。</p>
+<h3 id="4-列出一些你常见的运行时异常"><a href="#4-列出一些你常见的运行时异常" class="headerlink" title="4. 列出一些你常见的运行时异常"></a>4. 列出一些你常见的运行时异常</h3><p>IO异常<br>空指针异常<br>下标越界异常</p>
+<hr>
+<h2 id="xml"><a href="#xml" class="headerlink" title="xml"></a>xml</h2><h3 id="1-xml文档定义有几种形式？之间有何区别？解析xml文档有哪几种方式？"><a href="#1-xml文档定义有几种形式？之间有何区别？解析xml文档有哪几种方式？" class="headerlink" title="1. xml文档定义有几种形式？之间有何区别？解析xml文档有哪几种方式？"></a>1. xml文档定义有几种形式？之间有何区别？解析xml文档有哪几种方式？</h3><p>xml文档定义有DTD和Schema两种形式<br>二者都是对XML语法的约束，其本质区别在于Schema本身也是一个XML文件，可以被XML解析器解析，而且可以为XML承载的数据定义类型，约束能力较之DTD更强大。</p>
+<p>对XML的解析主要有DOM（文档对象模型，Document Object Model）、SAX（Simple API for XML）和StAX（Java 6中引入的新的解析XML的方式，Streaming API for XML）</p>
+<p>DOM处理大型文件时其性能下降的非常厉害，这个问题是由DOM树结构占用的内存较多造成的，而且DOM解析方式必须在解析文件之前把整个文档装入内存，适合对XML的随机访问（典型的用空间换取时间的策略）；</p>
+<p>SAX是事件驱动型的XML解析方式，它顺序读取XML文件，不需要一次全部装载整个文件。当遇到像文件开头，文档结束，或者标签开头与标签结束时，它会触发一个事件，用户通过事件回调代码来处理XML文件，适合对XML的顺序访问；</p>
+<p>StAX把重点放在流上，实际上StAX与其他解析方式的本质区别就在于应用程序能够把XML作为一个事件流来处理。将XML作为一组事件来处理的想法并不新颖（SAX就是这样做的），但不同之处在于StAX允许应用程序代码把这些事件逐个拉出来，而不用提供在解析器方便时从解析器中接收事件的处理程序。</p>
+<h3 id="2-你在项目的哪些地方用到了xml？"><a href="#2-你在项目的哪些地方用到了xml？" class="headerlink" title="2. 你在项目的哪些地方用到了xml？"></a>2. 你在项目的哪些地方用到了xml？</h3><p>配置文件</p>
+
+          
         
       
     </div>
@@ -1443,7 +1838,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1454,7 +1849,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1465,7 +1860,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1530,7 +1925,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共6.1k字</span>
+  <span class="post-count">博客全站共15.5k字</span>
 </div>
         
 <div class="busuanzi-count">
