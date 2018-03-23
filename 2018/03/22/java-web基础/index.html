@@ -111,7 +111,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/180323/0eLKiKi4Gl.png?imageslim">
 <meta property="og:image" content="http://oupdhjhnw.bkt.clouddn.com/blog/180323/mHlm1h8JDA.png?imageslim">
-<meta property="og:updated_time" content="2018-03-23T12:23:37.034Z">
+<meta property="og:updated_time" content="2018-03-23T12:43:44.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java web基础">
 <meta name="twitter:description" content="将java面试全集中内容重新分类整理后就有了这篇文章。">
@@ -365,6 +365,7 @@
 <a id="more"></a>
 <p>说到java web，只用文字说明未免有点死记硬背的感觉，不如结合实际项目来体会好些。以前是用Eclipse和Tomcat开发java web的，但现在已经习惯了用IDEA，所以根据这篇教程<a href="https://www.cnblogs.com/carsonzhu/p/5468223.html" target="_blank" rel="external">使用IntelliJ IDEA开发java web</a>在IDEA中创建一个java web项目。</p>
 <p>在java web项目创建Servlet、Fliter、Listener，可以直接用注解的方式进行配置，在类前面加上注解@WebServlet(“/login”)、@WebFilter(urlPatterns={“/*”})、@WebListener()；也可以在web.xml中配置，如下图：<br><img src="http://oupdhjhnw.bkt.clouddn.com/blog/180323/0eLKiKi4Gl.png?imageslim" alt="mark"><br>对于Filter和Listener只需要把Servlet替换成Fliter和Listener即可。建议使用注解的方式配置，这样web.xml看起来舒服多了。</p>
+<hr>
 <h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><h3 id="阐述Servlet和CGI的区别"><a href="#阐述Servlet和CGI的区别" class="headerlink" title="阐述Servlet和CGI的区别"></a>阐述Servlet和CGI的区别</h3><p>两者的区别在于Servlet处于服务器进程中，通过多线程的方式运行其Service()方法，一个实例可以服务多个请求，并且实例一般不会销毁；<br>CGI对每个请求都产生新的进程，服务完成后就销毁，所以效率低于Servlet。</p>
 <h3 id="Servlet接口中有哪些方法？"><a href="#Servlet接口中有哪些方法？" class="headerlink" title="Servlet接口中有哪些方法？"></a>Servlet接口中有哪些方法？</h3><p>在java web项目中新建一个Servlet类，可以看到这个Servlet继承于一个抽象类HttpServlet，而HttpServlet又继承于另一个抽象类GenericServlet，这个抽象类实现了Servlet接口，最终点进去Servlet接口时，可以看到有5个方法：</p>
 <p><img src="http://oupdhjhnw.bkt.clouddn.com/blog/180323/mHlm1h8JDA.png?imageslim" alt="mark"></p>
@@ -387,6 +388,7 @@
 <p>  要彻底解决乱码问题就应该让页面、服务器、请求和响应、Java程序都使用统一的编码，最好的选择当然是UTF-8。</p>
 </li>
 </ul>
+<hr>
 <h2 id="Jsp"><a href="#Jsp" class="headerlink" title="Jsp"></a>Jsp</h2><p>第一次请求一个Jsp页面时，Servlet/Jsp容器首先会把JSP页面转成一个Jsp类，这个类实现的接口也是Servlet的子接口，因此Jsp其实就是一个Servlet，对于同一个Jsp页面的后续请求，如果Jsp页面未修改，则直接返回内存中已存在的Servlet实例，否则，重新转换编译并执行。</p>
 <h3 id="Jsp有哪些内置对象？"><a href="#Jsp有哪些内置对象？" class="headerlink" title="Jsp有哪些内置对象？"></a>Jsp有哪些内置对象？</h3><p>9个内置对象：</p>
 <ul>
@@ -429,6 +431,7 @@
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;%-- 静态包含 --%&gt;</div><div class="line">&lt;%@ include file=&quot;...&quot; %&gt;</div><div class="line"></div><div class="line">&lt;%-- 动态包含 --%&gt;</div><div class="line">&lt;jsp:include page=&quot;...&quot;&gt;</div><div class="line">    &lt;jsp:param name=&quot;...&quot; value=&quot;...&quot; /&gt;</div><div class="line">&lt;/jsp:include&gt;</div></pre></td></tr></table></figure>
+<hr>
 <h2 id="JSTL"><a href="#JSTL" class="headerlink" title="JSTL"></a>JSTL</h2><h3 id="你的项目中使用了哪些JSTL标签？"><a href="#你的项目中使用了哪些JSTL标签？" class="headerlink" title="你的项目中使用了哪些JSTL标签？"></a>你的项目中使用了哪些JSTL标签？</h3><p>JSTL标签库提供了core、sql、fmt、xml等标签库，但是实际开发中建议只使用核心标签库(core)，而且只使用分支和循环标签并辅以表达式语言(EL).<br>循环标签：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;c:forEach&gt;</div></pre></td></tr></table></figure></p>
 <p>分支标签：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;c:if&gt;</div><div class="line">&lt;c:choose&gt;</div><div class="line">&lt;c:when&gt;</div><div class="line">&lt;c:otherwise&gt;</div></pre></td></tr></table></figure></p>
 <h3 id="使用标签库的好处？"><a href="#使用标签库的好处？" class="headerlink" title="使用标签库的好处？"></a>使用标签库的好处？</h3><ul>
@@ -437,6 +440,7 @@
 <li>标签具有很好的可移植性、可维护性和可重用性； </li>
 <li>避免了对Scriptlet（小脚本）的使用</li>
 </ul>
+<hr>
 <h2 id="EL"><a href="#EL" class="headerlink" title="EL"></a>EL</h2><h3 id="说一下表达式语言-EL-的隐式对象及其作用"><a href="#说一下表达式语言-EL-的隐式对象及其作用" class="headerlink" title="说一下表达式语言(EL)的隐式对象及其作用"></a>说一下表达式语言(EL)的隐式对象及其作用</h3><ul>
 <li>pageContext</li>
 <li>initParam：访问上下文参数</li>
@@ -460,11 +464,13 @@
 <li>条件运算符：${statement? A : B}（跟Java的条件运算符类似） </li>
 <li>empty运算符：检查一个值是否为null或者空（数组长度为0或集合中没有元素也返回true）</li>
 </ul>
+<hr>
 <h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><h3 id="过滤器有哪些作用和用法？"><a href="#过滤器有哪些作用和用法？" class="headerlink" title="过滤器有哪些作用和用法？"></a>过滤器有哪些作用和用法？</h3><p>对Web应用来说，过滤器是一个驻留在服务器端的web组件，它可以截取客户端和服务器之间的请求和响应信息，并对这些信息进行过滤。<br>当Web容器接受到一个对资源的请求的时候，它将判断是否有过滤器与这个资源相关联。如果有，那么容器把请求交给过滤器处理。在过滤器中，可以改变请求的内容，或重新设置请求的报头信息，然后再把请求发送给目标资源。<br>当目标资源对请求做出相应的时候，容器同样将响应先转发给过滤器，在过滤器中你可以对响应内容进行转换，然后再将响应发送到客户端。</p>
 <pre><code>过滤器常见的用途：
 对用户请求进行统一认证、对用户访问请求进行记录和审核、对用户发送的数据进行过滤和替换、转换图像格式、对响应内容进行压缩、对请求或响应进行加解密处理....
 和过滤器有关的接口主要有：Filter、FilterConfig、FilterChain
-</code></pre><h2 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h2><h3 id="监听器有哪些作用和用法"><a href="#监听器有哪些作用和用法" class="headerlink" title="监听器有哪些作用和用法"></a>监听器有哪些作用和用法</h3><p>java web中的监听器就是application、session、request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件，如下所示：</p>
+</code></pre><hr>
+<h2 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h2><h3 id="监听器有哪些作用和用法"><a href="#监听器有哪些作用和用法" class="headerlink" title="监听器有哪些作用和用法"></a>监听器有哪些作用和用法</h3><p>java web中的监听器就是application、session、request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件，如下所示：</p>
 <ul>
 <li>ServletContextListener：对Servlet上下文的创建和销毁进行监听。 </li>
 <li><p>ServletContextAttributeListener：监听Servlet上下文属性的添加、删除和替换。 </p>
@@ -478,6 +484,7 @@
 </li>
 <li>ServletRequestAttributeListener：对请求对象属性的添加、删除和替换进行监听。</li>
 </ul>
+<hr>
 <h2 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a>web.xml</h2><h3 id="web-xml中可以配置哪些内容？"><a href="#web-xml中可以配置哪些内容？" class="headerlink" title="web.xml中可以配置哪些内容？"></a>web.xml中可以配置哪些内容？</h3><p>web.xml用于配置Web应用的相关信息，如：监听器、过滤器、Servlet、相关参数、会话超时时间、安全验证方式、错误页面等，下面是常见的一些配置：</p>
 <p>配置Spring上下文加载监听器加载Spring配置文件并创建IoC容器：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;context-param&gt;</div><div class="line">    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">   &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;</div><div class="line"> &lt;/context-param&gt;</div><div class="line"></div><div class="line"> &lt;listener&gt;</div><div class="line">    &lt;listener-class&gt;</div><div class="line">      org.springframework.web.context.ContextLoaderListener</div><div class="line">    &lt;/listener-class&gt;</div><div class="line"> &lt;/listener&gt;</div></pre></td></tr></table></figure>
@@ -485,8 +492,10 @@
 <p>配置会话超时时间为10分钟：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;session-config&gt;</div><div class="line">      &lt;session-timeout&gt;10&lt;/session-timeout&gt;</div><div class="line">&lt;/session-config&gt;</div></pre></td></tr></table></figure></p>
 <p>配置404和Exception的错误页面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;error-page&gt;</div><div class="line">      &lt;error-code&gt;404&lt;/error-code&gt;</div><div class="line">      &lt;location&gt;/error.jsp&lt;/location&gt;</div><div class="line">  &lt;/error-page&gt;</div><div class="line"></div><div class="line">  &lt;error-page&gt;</div><div class="line">      &lt;exception-type&gt;java.lang.Exception&lt;/exception-type&gt;</div><div class="line">      &lt;location&gt;/error.jsp&lt;/location&gt;</div><div class="line">  &lt;/error-page&gt;</div></pre></td></tr></table></figure></p>
 <p>配置安全认证方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;security-constraint&gt;</div><div class="line">      &lt;web-resource-collection&gt;</div><div class="line">          &lt;web-resource-name&gt;ProtectedArea&lt;/web-resource-name&gt;</div><div class="line">          &lt;url-pattern&gt;/admin/*&lt;/url-pattern&gt;</div><div class="line">          &lt;http-method&gt;GET&lt;/http-method&gt;</div><div class="line">          &lt;http-method&gt;POST&lt;/http-method&gt;</div><div class="line">      &lt;/web-resource-collection&gt;</div><div class="line">      &lt;auth-constraint&gt;</div><div class="line">          &lt;role-name&gt;admin&lt;/role-name&gt;</div><div class="line">      &lt;/auth-constraint&gt;</div><div class="line">  &lt;/security-constraint&gt;</div><div class="line"></div><div class="line">  &lt;login-config&gt;</div><div class="line">      &lt;auth-method&gt;BASIC&lt;/auth-method&gt;</div><div class="line">  &lt;/login-config&gt;</div><div class="line"></div><div class="line">  &lt;security-role&gt;</div><div class="line">      &lt;role-name&gt;admin&lt;/role-name&gt;</div><div class="line">  &lt;/security-role&gt;</div></pre></td></tr></table></figure></p>
+<hr>
 <h2 id="文件上传和下载"><a href="#文件上传和下载" class="headerlink" title="文件上传和下载"></a>文件上传和下载</h2><p>上传页面的upload.jsp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;form action=&quot;upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</div><div class="line">  文件：&lt;input type=&quot;file&quot; name=&quot;photo&quot;/&gt;</div><div class="line">  &lt;input type=&quot;submit&quot; value=&quot;上传&quot;/&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure></p>
 <p>支持上传的Servlet<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Part part = request.getPart(&quot;photo&quot;);</div><div class="line">if (part != null &amp;&amp; part.getSubmittedFileName().length() &gt; 0)&#123;</div><div class="line">     // 用ServletContext对象的getRealPath()方法获得上传文件夹的绝对路径</div><div class="line">    String savePath = request.getServletContext().getRealPath(&quot;/upload&quot;);</div><div class="line">    part.write(savePath + &quot;/&quot; + part.getSubmittedFileName());</div><div class="line"></div><div class="line">    request.setAttribute(&quot;hint&quot;, &quot;上传成功！&quot;);</div><div class="line">&#125;else &#123;</div><div class="line">    request.setAttribute(&quot;hint&quot;,&quot;上传失败！&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">request.getRequestDispatcher(&quot;index.jsp&quot;).forward(request,response);</div></pre></td></tr></table></figure></p>
+<hr>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="get请求和post请求的区别？"><a href="#get请求和post请求的区别？" class="headerlink" title="get请求和post请求的区别？"></a>get请求和post请求的区别？</h3><ul>
 <li>get请求用来从服务器上获得资源，而post是用来向服务器提交数据； </li>
 <li>get将表单中数据按照name=value的形式，添加到action 所指向的URL 后面，并且两者使用”?”连接，而各个变量之间使用”&amp;”连接；post是将表单中的数据放在HTTP协议的请求头或消息体中，传递到action所指向URL； </li>
@@ -501,6 +510,7 @@
 <h3 id="java-web开发中的Model-1-和-Model-2-分别指的是什么？"><a href="#java-web开发中的Model-1-和-Model-2-分别指的是什么？" class="headerlink" title="java web开发中的Model 1 和 Model 2 分别指的是什么？"></a>java web开发中的Model 1 和 Model 2 分别指的是什么？</h3><p>Model 1是以页面为中心的Java Web开发，使用JSP+JavaBean技术将页面显示逻辑和业务逻辑处理分开，JSP实现页面显示，JavaBean对象用来保存数据和实现业务逻辑。</p>
 <p>Model 2是基于MVC（模型-视图-控制器，Model-View-Controller）架构模式的开发模型，实现了模型和视图的彻底分离，利于团队开发和代码复用。</p>
 <h3 id="解释一下网络应用的模式和特点"><a href="#解释一下网络应用的模式和特点" class="headerlink" title="解释一下网络应用的模式和特点"></a>解释一下网络应用的模式和特点</h3><p>大致分三类：B/S、C/S、P2P</p>
+<hr>
 <h2 id="Web-Service"><a href="#Web-Service" class="headerlink" title="Web Service"></a>Web Service</h2><h3 id="什么是Web-Service"><a href="#什么是Web-Service" class="headerlink" title="什么是Web Service?"></a>什么是Web Service?</h3><p>Web Service就是一个应用程序，它向外界暴露出一个能够通过Web进行调用的API。这就是说，你能够用编程的方法透明的调用这个应用程序，不需要了解它的任何细节，跟你使用的编程语言也没有关系。</p>
 
       
