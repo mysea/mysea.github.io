@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            alert('文章尚未完成...')
+            history.back();        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hiberante,MyBatis," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="本文讲解JDBC、Hibernate、Mybatis的基本操作，内容不是很全面，但会不定期的增删内容，修改错误:)">
+<meta name="keywords" content="Hiberante,MyBatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作数据库（上）;">
+<meta property="og:url" content="https://mysea.github.io/2018/03/30/操作数据库（上）/index.html">
+<meta property="og:site_name" content="sea.online">
+<meta property="og:description" content="本文讲解JDBC、Hibernate、Mybatis的基本操作，内容不是很全面，但会不定期的增删内容，修改错误:)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-02T08:14:03.192Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作数据库（上）;">
+<meta name="twitter:description" content="本文讲解JDBC、Hibernate、Mybatis的基本操作，内容不是很全面，但会不定期的增删内容，修改错误:)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mysea.github.io/2018/03/30/操作数据库（上）/"/>
+
+
+
+
+
+  <title>操作数据库（上）; | sea.online</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7660b47830c8f5fb763c22dc2b92fa47";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sea.online</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
+            
+            目录
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mysea.github.io/2018/03/30/操作数据库（上）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sea">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sea.online">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">操作数据库（上）;</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T12:00:30+08:00">
+                2018-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-EE/" itemprop="url" rel="index">
+                    <span itemprop="name">Java EE</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文讲解JDBC、Hibernate、Mybatis的基本操作，内容不是很全面，但会不定期的增删内容，修改错误:)</p>
+<a id="more"></a>
+<h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><h3 id="JDBC操作数据库的步骤"><a href="#JDBC操作数据库的步骤" class="headerlink" title="JDBC操作数据库的步骤"></a>JDBC操作数据库的步骤</h3><p>以MySql为例：</p>
+<ol>
+<li><p>加载驱动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/dbName?characterEncoding=&apos;UTF-8&apos;&quot;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String sql = &quot;select * from dbName where paramName = ?&quot;;</div><div class="line">PreparedStatement statement = connection.prepareStatement(sql);</div><div class="line">statement.setInt(1, paramValue);</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//执行非查询语句</div><div class="line">statement.execute();</div></pre></td></tr></table></figure>
+</li>
+<li><p>处理结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//执行查询语句</div><div class="line">ResultSet resultSet = statement.executeQuery(sql);</div><div class="line">while(resultSet.next())&#123;</div><div class="line">    int paramsValue = resultSet.getInt(&quot;paramsName&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>关闭资源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">finally&#123;</div><div class="line">    resultSet.close();</div><div class="line">    statement.close();</div><div class="line">    connection.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h2 id="Hibernate"><a href="#Hibernate" class="headerlink" title="Hibernate"></a>Hibernate</h2><p>使用JDBC做数据库相关功能开发会做很多重复性的工作，比如创建连接，关闭连接，把字段逐一映射到属性中。 Hibernate把这一切都封装起来了，使得数据库访问变得轻松而简单，代码也更加容易维护。 </p>
+<h3 id="配置文件："><a href="#配置文件：" class="headerlink" title="配置文件："></a>配置文件：</h3><ol>
+<li><p>xml方式<br>hibernate.cfg.xml：配置数据库连接信息：驱动、URl、账号、密码<br>xxx.hbm.xml：映射实体类对应的数据表，xxx代表实体类的名字，首字母需大写</p>
+</li>
+<li><p>注解方式<br>hibernate也可以使用注解来配置实体类和数据表的映射关系，类注解写在实体类的前面，如@Entity和@Table(name=”tableName”)，表示这是一个实体类，对应数据表为tableName；属性注解写在属性对应的getter方法前面，如@Id和@GeneratedValue(strategy = GenerationType.IDENTITY) 表示这个属性对应数据表中的主键、使用自增长方式，而@Column(name=”colName”)表示这个属性对应数据表中的字段colName。</p>
+</li>
+</ol>
+<p>使用注解配置实体类之后就不需要xxx.hbm.xml配置文件了，而hibernate.cfg.xml中的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;mapping resource=&quot;.../Product.hbm.xml&quot; /&gt;</div></pre></td></tr></table></figure></p>
+<p>也将变成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;mapping class=&quot;...Product&quot; /&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="映射关系"><a href="#映射关系" class="headerlink" title="映射关系"></a>映射关系</h3><p>假设有三张表：Product、Category和User，表示商品表、商品类目表和用户表，一个商品类目可以对应多个商品，一个用户可以购买多个商品，一个商品也可以被多个用户购买，即Product和Category是多对一，对Product来说是多对一，对Category来说是一对多，而Product和User则是多对多，因此它们之间还需一张中间表user_product。</p>
+<ol>
+<li>xml方式<br>多对一：<br>相应的在Product实体类中，增加Category category属性，然后在Product.hbm.xml中添加<many-to-one>的标签。<br>一对多：<br>而在Category实体类中，则增加Set<prodcut> products，然后在Category.hbm.xml中添加<set>标签，在set标签中再添加<one-to-many>标签。<br>多对多：<br>分别在Product和User的实体类和hbm.xml添加Set集合和Set标签，在Set标签内添加<many-to-many>标签</many-to-many></one-to-many></set></prodcut></many-to-one></li>
+<li>注解方式<br>多对一：<br>在Product实体类的Category属性前加上@ManyToOne和@JoinColumn(name=”cid”)注解，@ManyToOne表示多对一，@JoinColumn表示对应category的关系字段<br>一对多：<br>在Category实体类的Product的Set集合前面加上@OneToMany(fetch=FetchType.EAGER)和@JoinColumn(name=”cid”)，其中@OneToMany 表示一对多,fetch=FetchType.EAGER 表示不进行延迟加载(FetchType.LAZY表示要进行延迟加载)，@JoinColumn(name=”cid”) 表示映射字段<br>多对多：<br>在Product实体类前的getUsers()方法前添加：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)</div><div class="line">@JoinTable(</div><div class="line">    name=&quot;user_product&quot;,</div><div class="line">    joinColumns=@JoinColumn(name=&quot;pid&quot;),</div><div class="line">    inverseJoinColumns=@JoinColumn(name=&quot;uid&quot;)</div><div class="line">)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在User实体类的getProducts()方法前添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)</div><div class="line">@JoinTable(</div><div class="line">    name=&quot;user_product&quot;,</div><div class="line">    joinColumns=@JoinColumn(name=&quot;uid&quot;),</div><div class="line">    inverseJoinColumns=@JoinColumn(name=&quot;pid&quot;)</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<h4 id="关系的延迟加载"><a href="#关系的延迟加载" class="headerlink" title="关系的延迟加载"></a>关系的延迟加载</h4><p>一对多、多对多关系中都可以使用延迟加载，例如下面的语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Category c = (Category) s.get(Category.class, 1);</div><div class="line">System.out.println(c.getProducts());</div><div class="line">``` </div><div class="line">category和product是一对多的关系，在对应xml中设置了lazy=&quot;true&quot;或者注解中设置了fetch=FetchType.LAZY，都表示设置延迟加载。因此上述get方法查询的时候，只会查询category表，不会查询product表，而只有在调用getProducts()方法的时候才会去查询product表</div><div class="line"></div><div class="line">### 操作</div><div class="line">1. 操作前</div><div class="line">获取SessionFactory，通过工厂获取Session，在session的基础上开启一个事务</div><div class="line"></div><div class="line">    hibernate有两种方式获取session，分别是：OpenSession()和getCurrentSession()，两者区别在于:</div><div class="line">    ① OpenSession()每次得到的都是一个新的session对象，getCurrentSession()在同一个线程中，每次都是获取相同的Session对象，但在不同的线程中获取的是不同的Session对象</div><div class="line">    ② OpenSession只有在增加、删除、修改的时候需要事务，查询时是不需要的，getCurrentSession是所有操作都必须放在事务中进行，并且提交事务后，session就自动关闭，不能够再进行关闭</div><div class="line"></div><div class="line">2. 操作</div><div class="line">增：</div></pre></td></tr></table></figure></p>
+<p>session.save()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">删：</div></pre></td></tr></table></figure></p>
+<p>session.delete()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">改：</div></pre></td></tr></table></figure></p>
+<p>session.update()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">查：</div></pre></td></tr></table></figure></p>
+<p>session.get()/load()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">查询的时候，需要传入对应的实体类对象</div><div class="line"></div><div class="line">    get()和load()的区别：</div><div class="line">    ① load方式是延迟加载，只有属性被访问时才调用sql语句;get方式是非延迟加载，无论后面代码是否会访问属性，马上执行sql语句</div><div class="line">    ② 当id不存在是get方法返回null，load方式会抛出异常 </div><div class="line"></div><div class="line">3. 操作后</div><div class="line">提交事务，关闭Session，关闭SessionFactory</div><div class="line"></div><div class="line">### HQL</div><div class="line">Hibernate Query Language：是hibernate专门用于查询数据的语句，有别于SQL，HQL更接近于面向对象的思维方式。</div><div class="line"></div><div class="line">#### 操作</div><div class="line">1. 通过session的createQuery()方法传入HQL语句创建Query对象</div><div class="line">2. 然后用query对象的setXXX(0,paramValue)，跟jdbc的preparedStatement不同，这里的参数位置从0开始</div><div class="line">3. 最后再调用query对象的list()方法批量查询</div><div class="line"></div><div class="line">#### 查询总数</div><div class="line">sql语句：</div></pre></td></tr></table></figure></p>
+<p>select count(*) from table …<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">上面第2步之后调用query对象的uniqueResult()返回long型数据</div><div class="line"></div><div class="line">### Criteria</div><div class="line">与HQL和SQL的区别是Criteria 完全是 面向对象的方式在进行数据查询，将不再看到有sql语句的痕迹</div><div class="line">#### 操作</div><div class="line">1. 通过session的createCriteria()方法创建一个Criteria对象</div><div class="line">2. 通过cretia对象的add()方法传入一个约束对象</div><div class="line">3. 最后再调用cretia对象的list()方法批量查询</div><div class="line"></div><div class="line">注意：</div><div class="line">hibernate有缓存机制，当使用list()方法时直接从数据库中查询，而使用iterate()方法时，会返回对应记录的ID，如果缓存中有该id，则直接从缓存中取，如果没有再从数据库中取。</div></pre></td></tr></table></figure></p>
+<p>Iterator<product> it= q.iterate();<br>while(it.hasNext()){<br>    Product p =it.next();<br>    System.out.println(p.getName());<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 其他操作</div><div class="line"></div><div class="line">#### 分页查询</div><div class="line">在上面操作的第2步之后，调用cretia对象的setFirstRsult(fValue)和setMaxResult(mValue)，参数值分别表示从第几行开始，查多少条记录</div><div class="line"></div><div class="line">#### SQL</div><div class="line">hibernate中可以使用标准sql语句查询</div><div class="line">调用session对象的createQuery()方法传入标准sql语句，再执行query对象的list()方法即可</div><div class="line"></div><div class="line">#### 缓存</div><div class="line">hibernate默认是开启一级缓存的，一级缓存存放在session上，二级缓存是在SessionFactory上。</div><div class="line">hibernate本身不提供二级缓存，都是使用第三方的二级缓存插件，这里在hibernate.cfg.xml中开启二级缓存的配置，这里使用的是 EhCache提供的二级缓存：</div></pre></td></tr></table></figure></product></p>
+<p><property name="hibernate.cache.use_second_level_cache">true</property></p>
+<p><property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这里还需要一个ehcache.xml用户EHCache的缓存配置:</div></pre></td></tr></table></figure></p>
+<p><ehcache></ehcache></p>
+<p><diskstore path="java.io.tmpdir"></diskstore></p>
+<p><defaultcache maxelementsinmemory="10000" eternal="false" timetoidleseconds="120" timetoliveseconds="120" overflowtodisk="true"><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">设置某个实体类开启二级缓存，在实体类对应的xml文件中添加</div></pre></td></tr></table></figure></defaultcache></p>
+<p><cache usage="read-only"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">## MyBatis</div><div class="line">使用MyBatis之后，只需提供SQL语句，其他的工作都交给MyBatis去做了</div><div class="line"></div><div class="line">### 配置文件</div><div class="line">mybatis-config.xml：主要提供连接数据库的驱动、url、账号密码等</div><div class="line"></div><div class="line">其他配置：</div><div class="line">1. xml方式</div><div class="line">Xxx.xml：和某一个实体类相对应，对这个实体类的所有操作的SQL语句都写在这个xml文件中</div><div class="line"></div><div class="line">2. 注解方式</div><div class="line">新增接口XxxMapper(Xxx对应实体类的名字)，在接口声明的方法上加上注解，例如：</div></pre></td></tr></table></figure></cache></p>
+<p>public interface CategoryMapper{<br>    @Insert(“insert into category (name) values (#{name})”)<br>    public int add(Category category);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">此时mybatis-config.xml中的mapper注解也将变成下面所示：</div></pre></td></tr></table></figure></p>
+<p><mappers><br>    <mapper class="xxx.xxx.CategoryMapper">&gt;<br></mapper></mappers><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 操作</div><div class="line">增删改查都是利用SQL语句实现，这里重点介绍动态查询用到的一些标签：</div><div class="line">#### if</div><div class="line">当一个表字段比较多，为了应付各个字段的查询，就需要写多条sql语句，这样就变得难以维护。这个时候就可以用上Mybatis 动态SQL里的if标签:</div></pre></td></tr></table></figure></p>
+<p>select * from product</p>
+<p><if test="name != null"><br>    where name like concat(‘%’,#{name},’%’)<br></if><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">当传入的参数值为Null的时候，sql语句将忽略if语句里的条件。</div><div class="line"></div><div class="line">#### where</div><div class="line">在进行多条件判断的时候，只有if标签并不能满足需求，譬如上面的sql语句中再加上一个if判断：</div></pre></td></tr></table></figure></p>
+<p>select * from product</p>
+<p><if test="name != null"><br>    where name like concat(‘%’,#{name},’%’)<br></if></p>
+<p><if test="price != null"><br>    and price &gt; #{price}<br></if><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">当name为空，price不为空时将报错，这时可以使用where标签：如果任何条件都不成立，那么在SQL语句中就不会出现where关键字，如果有任何条件成立，会自动去掉多出来的and或or，修改后的sql如下：</div></pre></td></tr></table></figure></p>
+<p>select * from product</p>
+<p><where><br>    <if test="name != null"><br>        and name like concat(‘%’,#{name},’%’)<br>    </if><br>    <if test="price != null"><br>        and price &gt; #{price}<br>    </if><br></where><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### set</div><div class="line">在update语句中也会碰到多个字段相关的问题，这时用set标签：</div></pre></td></tr></table></figure></p>
+<p>update product</p>
+<p><set><br>    <if test="name != null">name=#{name},</if><br>    <if test="price != null">price=#{price}</if><br></set><br>where id=#{id}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### trim</div><div class="line">trim用来定制想要的功能，比如where标签可以用</div></pre></td></tr></table></figure></p>
+<p><trim prefix="WHERE" prefixoverrides="AND | OR"><br>…<br></trim><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set标签可以用</div></pre></td></tr></table></figure></p>
+<p><trim prefix="SET" suffixoverrides=","><br>…<br></trim><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### when otherwise</div><div class="line">MyBatis中没有else标签，但是可以用when otherwise标签来达到同样的效果</div></pre></td></tr></table></figure></p>
+<p>select * from product</p>
+<p><where><br>    <when test="name != null"><br>        and name like concat(‘%’,#{name},’%’)<br>    </when><br>    <when test="price != null and price != 0"><br>        and price &gt; #{price}<br>    </when><br>    <otherwise><br>        and id &gt; 1<br>    </otherwise><br></where><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">上面的三条and语句中，任何一个标签中的判断成立就执行对应标签里的SQL语句</div><div class="line"></div><div class="line">#### foreach</div><div class="line">foreach标签通常用于in这种语法</div></pre></td></tr></table></figure></p>
+<p>select * from product<br>where id in</p>
+<p><foreach item="item" index="index" collection="list" open="(" separator="," close=")"></foreach></p>
+<pre><code>#{item}
+</code></pre><p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### bind</div><div class="line">bind标签作用类似于字符串拼接</div></pre></td></tr></table></figure></p>
+<p><bind name="likename" value="'%' + name + '%'"><br>select * from product where name like #{likename}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 映射关系</div><div class="line">1. xml方式</div><div class="line">一对多：</div><div class="line"></div><div class="line">多对一：</div><div class="line"></div><div class="line">多对多：</div><div class="line"></div><div class="line"></div><div class="line">2. 注解方式</div><div class="line">略</div><div class="line"></div><div class="line"></div><div class="line">### 其他概念</div><div class="line">#### 日志</div><div class="line">MyBatis自身没有带日志，这里使用第三方的日志log4j</div><div class="line">1. 导入jar</div><div class="line">2. 创建log4j.properties</div><div class="line"></div><div class="line">#### 开启事务</div><div class="line">使用jdbc方式，在mybatis-config.xml中的enviroment标签中添加如下标签：</div></pre></td></tr></table></figure></bind></p>
+<p><transactionmanager type="JDBC"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">注意MySQL的表类型必须是INNODB才支持事务</div><div class="line"></div><div class="line">### 延迟加载</div><div class="line">在mybatis-config.xml中的configuration内加入如下内容：</div></pre></td></tr></table></figure></transactionmanager></p>
+<p><settings><br>    <!-- 打开延迟加载的开关 --><br>    <setting name="lazyLoadingEnabled" value="true"><br>    <!-- 将积极加载改为消息加载即按需加载 --><br>    <setting name="aggressiveLazyLoading" value="false"><br></setting></setting></settings><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 分页</div><div class="line">1. xml方式</div></pre></td></tr></table></figure></p>
+<p>select * from category </p>
+<p><if test="start!=null and count!=null"><br>    limit #{start},#{count}<br></if><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2. 注解方式</div></pre></td></tr></table></figure></p>
+<p>@Select(“ select * from category limit #{start},#{count}”)<br>public List<category> listByPage(@Param(“start”) int start, @Param(“count”)int count);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 缓存</div><div class="line">Mybatis的一级缓存在session上，只要通过session查过的数据，都会放在session上，下一次再查询相同id的数据，都直接冲缓存中取出来，而不用到数据库里去取了。</div><div class="line">Mybatis二级缓存是SessionFactory，如果两次查询基于同一个SessionFactory，那么就从二级缓存中取数据，而不用到数据库里去取了。</div><div class="line">二级缓存需要在mybatis-config.xml的延迟加载配置中加入以下内容：</div></pre></td></tr></table></figure></category></p>
+<p><setting name="cacheEnabled" value="true"><br>```<br>要想缓存某张表的数据，需要修改实体类使之实现Serializable接口，还要在实体类对应的xml文件中mapper标签内加入<cache>标签</cache></setting></p>
+<h2 id="JPA"><a href="#JPA" class="headerlink" title="JPA"></a>JPA</h2><p>关于JPA目前只用过Spring Boot的JPA，其实也是在Hiberante的基础上进一步的封装，只需定义相应的接口，继承特定的Repository，就能够实现基本的增删改操作，至于查询可以通过特定的规则定义接口里的方法名。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>码字不易</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sea WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    sea
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://mysea.github.io/2018/03/30/操作数据库（上）/" title="操作数据库（上）;">https://mysea.github.io/2018/03/30/操作数据库（上）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hiberante/" rel="tag"><i class="fa fa-tag"></i> Hiberante</a>
+          
+            <a href="/tags/MyBatis/" rel="tag"><i class="fa fa-tag"></i> MyBatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/30/操作数据库（下）/" rel="next" title="操作数据库（下）;">
+                <i class="fa fa-chevron-left"></i> 操作数据库（下）;
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avator.jpg"
+               alt="sea" />
+          <p class="site-author-name" itemprop="name">sea</p>
+           
+              <p class="site-description motion-element" itemprop="description">这是我的个人博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              github
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/mysea" title="github" target="_blank">github</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC"><span class="nav-number">1.</span> <span class="nav-text">JDBC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC操作数据库的步骤"><span class="nav-number">1.1.</span> <span class="nav-text">JDBC操作数据库的步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate"><span class="nav-number">2.</span> <span class="nav-text">Hibernate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件："><span class="nav-number">2.1.</span> <span class="nav-text">配置文件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#映射关系"><span class="nav-number">2.2.</span> <span class="nav-text">映射关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关系的延迟加载"><span class="nav-number">2.2.1.</span> <span class="nav-text">关系的延迟加载</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JPA"><span class="nav-number">3.</span> <span class="nav-text">JPA</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sea</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共21.7k字</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
