@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            alert('文章尚未完成...')
+            history.back();        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Docker（集装箱），确实有点像轻量级的虚拟机，但又不相同。有了Docker，在一台物理机器上可以运行多个容器，每个容器可以提供不同的服务，容器是由镜像生成的，而镜像，既可以用Dockerfile构建，也可以直接从官方仓库(DokcerHub)或者私有仓库上pull下来，为了方便地管理多个容器，docker还提供了DockerCompose，将多个容器的配置信息写在yml文件中，一次可以启动多个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker">
+<meta property="og:url" content="https://mysea.github.io/2018/05/01/Docker/index.html">
+<meta property="og:site_name" content="sea.online">
+<meta property="og:description" content="Docker（集装箱），确实有点像轻量级的虚拟机，但又不相同。有了Docker，在一台物理机器上可以运行多个容器，每个容器可以提供不同的服务，容器是由镜像生成的，而镜像，既可以用Dockerfile构建，也可以直接从官方仓库(DokcerHub)或者私有仓库上pull下来，为了方便地管理多个容器，docker还提供了DockerCompose，将多个容器的配置信息写在yml文件中，一次可以启动多个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-05T10:25:34.775Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker">
+<meta name="twitter:description" content="Docker（集装箱），确实有点像轻量级的虚拟机，但又不相同。有了Docker，在一台物理机器上可以运行多个容器，每个容器可以提供不同的服务，容器是由镜像生成的，而镜像，既可以用Dockerfile构建，也可以直接从官方仓库(DokcerHub)或者私有仓库上pull下来，为了方便地管理多个容器，docker还提供了DockerCompose，将多个容器的配置信息写在yml文件中，一次可以启动多个">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mysea.github.io/2018/05/01/Docker/"/>
+
+
+
+
+
+  <title>Docker | sea.online</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7660b47830c8f5fb763c22dc2b92fa47";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sea.online</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
+            
+            目录
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mysea.github.io/2018/05/01/Docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sea">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sea.online">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-01T23:06:13+08:00">
+                2018-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Docker（集装箱），确实有点像轻量级的虚拟机，但又不相同。有了Docker，在一台物理机器上可以运行多个容器，每个容器可以提供不同的服务，容器是由镜像生成的，而镜像，既可以用Dockerfile构建，也可以直接从官方仓库(DokcerHub)或者私有仓库上pull下来，为了方便地管理多个容器，docker还提供了DockerCompose，将多个容器的配置信息写在yml文件中，一次可以启动多个容器。有了docker，环境是可以共用的，可以将镜像推送到仓库上，其他人可以下载然后生成容器，这样就保证了不会出现“在我的机器上是可以运行的”这种情况，并且docker镜像或容器的创建删除都很方便。</p>
+<a id="more"></a>
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>Dockerfile是自动构建docker镜像的配置文件，Dockerfile中的命令非常类似linux shell下的命令</p>
+<p>Dockerfile可以让用户自定义构建docker镜像，支持以 # 开头的注释行</p>
+<p>通常包含四部分：</p>
+<ul>
+<li>基础镜像(父)镜像</li>
+<li>维护者信息</li>
+<li>镜像操作命令</li>
+<li>容器启动命令</li>
+</ul>
+<p>举个栗子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"># 基于父镜像构建其他docker镜像，父镜像：可以通过docker pull 命令获得，也可以自己制作</div><div class="line">FROM       centos:centos7.1.1503  </div><div class="line"></div><div class="line"># Dockerfile维护者</div><div class="line">MAINTAINER Carson,C.J.Zeong &lt;zcy@nicescale.com&gt;                           </div><div class="line"></div><div class="line"># ENV（environment）设置环境变量，一个Dockerfile中可以写多个。下面的例子是：设置docker容器的时区为Shanghai                                                                          </div><div class="line">ENV TZ &quot;Asia/Shanghai&quot;                                                    </div><div class="line">ENV TERM xterm                                                            </div><div class="line"></div><div class="line"># 拷贝和Dockerfile同一目录下的文件到容器内部指定目录下                                                                         </div><div class="line">ADD aliyun-mirror.repo /etc/yum.repos.d/CentOS-Base.repo                  </div><div class="line">ADD aliyun-epel.repo /etc/yum.repos.d/epel.repo                           </div><div class="line"></div><div class="line"># 运行yum命令安装依赖。注意，安装后所有的依赖，都将打包进入 image 文件。</div><div class="line">RUN yum install -y curl wget tar bzip2 unzip vim-enhanced passwd sudo yum-</div><div class="line">sync man &amp;&amp; \                                                             </div><div class="line">    yum install -y gcc gcc-c++ git make automake cmake patch logrotate pyt</div><div class="line">jpeg-devel &amp;&amp; \                                                           </div><div class="line">    yum install -y --enablerepo=epel pwgen python-pip &amp;&amp; \                </div><div class="line">    yum clean all                                                         </div><div class="line"></div><div class="line"># supervisor进程管理系统                                                                          </div><div class="line">RUN pip install supervisor </div><div class="line"># 添加supervisor的主配置文件，到docker容器里                                               </div><div class="line">ADD supervisord.conf /etc/supervisord.conf                                </div><div class="line">                                                                          </div><div class="line">RUN mkdir -p /etc/supervisor.conf.d &amp;&amp; \                                  </div><div class="line">    mkdir -p /var/log/supervisor                                          </div><div class="line"></div><div class="line"># 将容器 3000 端口暴露出来， 允许外部连接这个端口。推荐使用docker run -p &lt;host_port&gt;:&lt;container_port&gt; 来固化端口                            </div><div class="line">EXPOSE 22                                                                 </div><div class="line"></div><div class="line"># 容器启动命令</div><div class="line"># 一个Dockerfile中只有最后一条ENTRYPOINT生效，并且每次启动docker容器，都会执行ENTRYPOINT                </div><div class="line">ENTRYPOINT [&quot;/usr/bin/supervisord&quot;, &quot;-n&quot;, &quot;-c&quot;, &quot;/etc/supervisord.conf&quot;]</div></pre></td></tr></table></figure></p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>在Dockerfile中每执行一条指令（ENV、ADD、RUN等命令），都会生成一个docker image layer</p>
+<h3 id="ADD-amp-COPY"><a href="#ADD-amp-COPY" class="headerlink" title="ADD &amp; COPY"></a>ADD &amp; COPY</h3><p>拷贝本地文件的命令除了ADD还有COPY，两者区别在于ADD还可以 </p>
+<ol>
+<li><p>可以拷贝URL链接地址下的文件</p>
+</li>
+<li><p>具有解压软件包的功能(支持gzip, bzip2 or xz)</p>
+</li>
+</ol>
+<h3 id="ENTRYPOINT-amp-CMD"><a href="#ENTRYPOINT-amp-CMD" class="headerlink" title="ENTRYPOINT &amp; CMD"></a>ENTRYPOINT &amp; CMD</h3><h4 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h4><p>使用方法：</p>
+<ol>
+<li><p>ENTRYPOINT [“executable”, “param1”, “param2”] (the preferred exec form)</p>
+<p> 推荐使用1方法，启动起来后，pid为1</p>
+</li>
+<li><p>ENTRYPOINT command param1 param2 (shell form) </p>
+<p> 启动起来后，pid号为shell命令执行完的pid号</p>
+</li>
+</ol>
+<h4 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h4><p>使用方法：</p>
+<ol>
+<li><p>CMD [“executable”,”param1”,”param2”] (exec form, this is the preferred form)<br>运行一个可执行的文件并提供参数</p>
+</li>
+<li><p>CMD [“param1”,”param2”] (as default parameters to ENTRYPOINT)<br>为ENTRYPOINT指定参数</p>
+</li>
+<li><p>CMD command param1 param2 (shell form)<br>以”/bin/sh -c”的方法执行的命令</p>
+</li>
+</ol>
+<h3 id="ONBUILD"><a href="#ONBUILD" class="headerlink" title="ONBUILD"></a>ONBUILD</h3><p>上面文件没有出现的命令，比如ONBUILD命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ONBUILD ADD . /app</div></pre></td></tr></table></figure></p>
+<p>ONBUILD命令意思是构建容器的时候不执行ONBUILD命令，而用该容器的Dockerfile作为父镜像去构建另一个容器的时候才执行ONBUILD命令，即</p>
+<pre><code>A镜像中有ONBUILD指令，在构建A镜像时ONBUILD指令不执行；B镜像FROM A，在构建B镜像时ONBUILD指令开始执行
+</code></pre><h3 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a>VOLUME</h3><p>上面文件没有出现的命令如VOLUMN命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">VOLUME [&quot;/var/lib/mysql&quot;]</div></pre></td></tr></table></figure></p>
+<p>VOLUME指令，宿主机文件目录和docker容器文件目录做映射，保证删除容器后，数据不被删除：</p>
+<ul>
+<li>保存容器中的数据</li>
+<li>数据共享</li>
+</ul>
+<p>使用方法：</p>
+<ol>
+<li><p>在Dockerfile中定义VOLUME[“/data”]</p>
+</li>
+<li><p>构建容器是添加-v参数：docker run -d -v <host_dir>:<container_dir></container_dir></host_dir></p>
+</li>
+</ol>
+<h2 id="镜像-amp-容器的常用命令"><a href="#镜像-amp-容器的常用命令" class="headerlink" title="镜像 &amp; 容器的常用命令"></a>镜像 &amp; 容器的常用命令</h2><h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>用Dockerfile构建镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker build -t 镜像名:标签 Dockfile路径</div></pre></td></tr></table></figure></p>
+<p>查看所有本地镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker images</div></pre></td></tr></table></figure></p>
+<p>重命名镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker tag 镜像id 新镜像名:新标签</div></pre></td></tr></table></figure></p>
+<p>删除镜像：<br>删除镜像前需要删除使用该镜像构建的容器，删除容器前需要停掉容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rmi 镜像id</div></pre></td></tr></table></figure></p>
+<p>有些镜像是中间镜像，会提示无法删除，可以加上-f参数强制删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rmi -f 镜像id</div></pre></td></tr></table></figure></p>
+<p>删除所有镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rmi $(docker images -q)</div></pre></td></tr></table></figure></p>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>用镜像构建容器:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run [-it/-d -p/-P host_port:container_port --name 容器名 --rm -v host_dir:container_dir -e name=value --link containName] 镜像名:标签</div></pre></td></tr></table></figure></p>
+<p><strong>-it</strong> 容器的 Shell 映射到当前的 Shell，然后你在本机窗口输入的命令，就会传入容器。<br><strong>-d</strong> 启动docker容器在后台，执行命令后返回容器ID<br><strong>-p 22</strong> 将宿主机的一个未使用的随机端口映射到容器的22端口，每次宿主机或容器重启后，映射端口改变<br><strong>-P 2222:22</strong> 容器的 22 端口映射到本机的 2222 端口，宿主机或容器重启后，映射端口不变<br><strong>–name 容器名</strong> 给容器命名<br><strong>–rm</strong> 容器停止运行后，自动删除容器文件<br><strong>-v host_dir:container_dir</strong> 同步宿主机host_dir目录下和容器container_dir目录下的文件<br><strong>-e name=value</strong> 向容器传入环境变量<br><strong>–link containName</strong> 连接已存在的容器<br><strong>镜像名:标签</strong> 使用这个镜像创建docker容器</p>
+<p>查看本地运行状态的容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker ps</div></pre></td></tr></table></figure></p>
+<p>查看本地所有容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker ps -a</div></pre></td></tr></table></figure></p>
+<p>停止运行中的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker stop 容器id</div></pre></td></tr></table></figure></p>
+<p>启动关闭的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker start 容器id</div></pre></td></tr></table></figure></p>
+<p>删除容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rm 容器id</div></pre></td></tr></table></figure></p>
+<p>删除所有容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rm $(docker ps -a -q)</div></pre></td></tr></table></figure></p>
+<p>进入容器bash命令终端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker exec -it 容器名 /bin/bash</div></pre></td></tr></table></figure></p>
+<p>进入容器后查看容器中运行的进程:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">supervisorctl</div></pre></td></tr></table></figure></p>
+<p>复制容器内的文件到当前目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker cp [containID]:[/path/file] .</div></pre></td></tr></table></figure></p>
+<p>查看容器的输出，即容器里面 Shell 的标准输出。如果docker run命令运行容器的时候，没有使用-it参数，就要用这个命令查看输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs [containID]</div></pre></td></tr></table></figure></p>
+<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker-Compose"></a>Docker-Compose</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Compose 是 Docker 公司推出的一个工具软件，可以管理多个 Docker 容器组成一个应用。你需要定义一个 YAML 格式的配置文件docker-compose.yml，写好多个容器之间的调用关系。然后，只要一个命令，就能同时启动/关闭这些容器。</p>
+<p>举个栗子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">mysql:</div><div class="line">    image: mysql:5.7</div><div class="line">    environment:</div><div class="line">     - MYSQL_ROOT_PASSWORD=123456</div><div class="line">     - MYSQL_DATABASE=wordpress</div><div class="line">web:</div><div class="line">    image: wordpress</div><div class="line">    links:</div><div class="line">     - mysql</div><div class="line">    environment:</div><div class="line">     - WORDPRESS_DB_PASSWORD=123456</div><div class="line">    ports:</div><div class="line">     - &quot;127.0.0.3:8080:80&quot;</div><div class="line">    working_dir: /var/www/html</div><div class="line">    volumes:</div><div class="line">     - wordpress:/var/www/html</div></pre></td></tr></table></figure></p>
+<h3 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h3><p>启动上面定义的两个容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up</div></pre></td></tr></table></figure></p>
+<p>不想看到一堆输出信息，可以在上面命令后加上<strong>-d</strong>参数，这里没有<strong>–name</strong>参数来指定容器名，容器最终命名为  docker-compose.yml所在文件夹的名字-镜像名</p>
+<p>查看由docker-compose启动起来的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose ps</div></pre></td></tr></table></figure></p>
+<p>停止：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose stop</div></pre></td></tr></table></figure></p>
+<p>删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose rm</div></pre></td></tr></table></figure></p>
+<h2 id="Docker-Registry"><a href="#Docker-Registry" class="headerlink" title="Docker Registry"></a>Docker Registry</h2><p>Docker有官方的仓库<a href="https://hub.docker.com/explore/" target="_blank" rel="external">DockerHub</a>仓库。但很多时候我们往往需要建一个自己的私有仓库，私有仓库地址如<strong>register_url:port/namespace/image_name:tag</strong>，这里的namespace可以没有，tag没有默认为latest</p>
+<p>步骤可分如下几步，假设远程主机的registry_url是172.17.251.33，并且本地主机可以Ping通：</p>
+<ol>
+<li>远程主机启动registry容器<br>下载最新的registry镜像：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull registry</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>启动容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 5000:5000 --name registry registry</div></pre></td></tr></table></figure></p>
+<ol>
+<li>本地主机修改配置文件<br>之所以有这一步是因为docker只允许https的registry_url，如果registry_url为http则需要修改本地机器的Docker配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/default/docker</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>增加以下一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DOCKER_OPTS=&quot;$DOCKER_OPTS --insecure-registry=172.17.251.33:5000&quot;</div></pre></td></tr></table></figure></p>
+<p>重启Docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service docker restart</div></pre></td></tr></table></figure></p>
+<p>重启后registry容器关闭了，需要重新启动</p>
+<ol>
+<li><p>修改本地主机要推送的镜像文件的名字，前面加上远程仓库的url和端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker tag imageName:tag 172.17.251.33:5000/imageName:tag</div></pre></td></tr></table></figure>
+</li>
+<li><p>推送</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker push 172.17.251.33:5000/imageName:tag</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>查看镜像是否上传成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl http://172.17.251.33:5000/v1/search</div></pre></td></tr></table></figure></p>
+<p>在其他机器上下载远程私有仓库的镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull 172.17.251.33:5000/imageName:tag</div></pre></td></tr></table></figure></p>
+<p>除此之外，可以通过一些容器管理平台对私有仓库上的容器进行管理，在测试上述代码过程中，发现阿里云非常坑爹的push上去之后无法通过curl查看，也无法通过公网访问容器管理平台。难道阿里云端口映射的是私网IP？？？腾讯则可以通过公网IP访问</p>
+<h2 id="Jenkins持续集成"><a href="#Jenkins持续集成" class="headerlink" title="Jenkins持续集成"></a>Jenkins持续集成</h2><p>在上面的操作中，我们以命令行的方式构建镜像，再由镜像构建容器，再将镜像推送到registry上，当容器或镜像数量很多的时候，每次修改代码需要重新部署时执行这些操作是极其繁琐的，Jenkins就是一个可以自动集成的工具。</p>
+<p>下载Jenkins镜像，生成Jenkins容器后，通过配置github，配置Jenkins自动构建的脚本，当修改代码后，直接将代码上传到github上，Jenkins可以自动检测到代码发生了变化，然后会去github下载相应的Dockfile文件，重新生成镜像，生成容器，将新的镜像推送至registry上。当第一次配置之后，以后修改便无需手动的用命令行的方式去build或run。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>码字不易</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sea WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    sea
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://mysea.github.io/2018/05/01/Docker/" title="Docker">https://mysea.github.io/2018/05/01/Docker/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/30/操作数据库（下）/" rel="next" title="操作数据库（下）">
+                <i class="fa fa-chevron-left"></i> 操作数据库（下）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avator.jpg"
+               alt="sea" />
+          <p class="site-author-name" itemprop="name">sea</p>
+           
+              <p class="site-description motion-element" itemprop="description">这是我的个人博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              github
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/mysea" title="github" target="_blank">github</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile"><span class="nav-number">1.</span> <span class="nav-text">Dockerfile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADD-amp-COPY"><span class="nav-number">1.2.</span> <span class="nav-text">ADD & COPY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENTRYPOINT-amp-CMD"><span class="nav-number">1.3.</span> <span class="nav-text">ENTRYPOINT & CMD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ENTRYPOINT"><span class="nav-number">1.3.1.</span> <span class="nav-text">ENTRYPOINT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMD"><span class="nav-number">1.3.2.</span> <span class="nav-text">CMD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ONBUILD"><span class="nav-number">1.4.</span> <span class="nav-text">ONBUILD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VOLUME"><span class="nav-number">1.5.</span> <span class="nav-text">VOLUME</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#镜像-amp-容器的常用命令"><span class="nav-number">2.</span> <span class="nav-text">镜像 & 容器的常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像"><span class="nav-number">2.1.</span> <span class="nav-text">镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器"><span class="nav-number">2.2.</span> <span class="nav-text">容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">3.</span> <span class="nav-text">Docker-Compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关命令"><span class="nav-number">3.2.</span> <span class="nav-text">相关命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Registry"><span class="nav-number">4.</span> <span class="nav-text">Docker Registry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins持续集成"><span class="nav-number">5.</span> <span class="nav-text">Jenkins持续集成</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sea</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共24.3k字</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
