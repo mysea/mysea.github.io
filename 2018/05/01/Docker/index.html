@@ -108,7 +108,7 @@
 <meta property="og:site_name" content="sea.online">
 <meta property="og:description" content="Docker（集装箱），确实有点像轻量级的虚拟机，但又不相同。有了Docker，在一台物理机器上可以运行多个容器，每个容器可以提供不同的服务，容器是由镜像生成的，而镜像，既可以用Dockerfile构建，也可以直接从官方仓库(DokcerHub)或者私有仓库上pull下来，为了方便地管理多个容器，docker还提供了DockerCompose，将多个容器的配置信息写在yml文件中，一次可以启动多个">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-05T10:25:34.775Z">
+<meta property="og:updated_time" content="2018-05-05T10:32:51.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker">
 <meta name="twitter:description" content="Docker（集装箱），确实有点像轻量级的虚拟机，但又不相同。有了Docker，在一台物理机器上可以运行多个容器，每个容器可以提供不同的服务，容器是由镜像生成的，而镜像，既可以用Dockerfile构建，也可以直接从官方仓库(DokcerHub)或者私有仓库上pull下来，为了方便地管理多个容器，docker还提供了DockerCompose，将多个容器的配置信息写在yml文件中，一次可以启动多个">
@@ -386,7 +386,7 @@
 <ol>
 <li><p>在Dockerfile中定义VOLUME[“/data”]</p>
 </li>
-<li><p>构建容器是添加-v参数：docker run -d -v <host_dir>:<container_dir></container_dir></host_dir></p>
+<li><p>构建容器是添加-v参数：<strong>docker run -d -v <host_dir>:<container_dir></container_dir></host_dir></strong></p>
 </li>
 </ol>
 <h2 id="镜像-amp-容器的常用命令"><a href="#镜像-amp-容器的常用命令" class="headerlink" title="镜像 &amp; 容器的常用命令"></a>镜像 &amp; 容器的常用命令</h2><h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>用Dockerfile构建镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker build -t 镜像名:标签 Dockfile路径</div></pre></td></tr></table></figure></p>
@@ -396,7 +396,7 @@
 <p>有些镜像是中间镜像，会提示无法删除，可以加上-f参数强制删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rmi -f 镜像id</div></pre></td></tr></table></figure></p>
 <p>删除所有镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rmi $(docker images -q)</div></pre></td></tr></table></figure></p>
 <h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>用镜像构建容器:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run [-it/-d -p/-P host_port:container_port --name 容器名 --rm -v host_dir:container_dir -e name=value --link containName] 镜像名:标签</div></pre></td></tr></table></figure></p>
-<p><strong>-it</strong> 容器的 Shell 映射到当前的 Shell，然后你在本机窗口输入的命令，就会传入容器。<br><strong>-d</strong> 启动docker容器在后台，执行命令后返回容器ID<br><strong>-p 22</strong> 将宿主机的一个未使用的随机端口映射到容器的22端口，每次宿主机或容器重启后，映射端口改变<br><strong>-P 2222:22</strong> 容器的 22 端口映射到本机的 2222 端口，宿主机或容器重启后，映射端口不变<br><strong>–name 容器名</strong> 给容器命名<br><strong>–rm</strong> 容器停止运行后，自动删除容器文件<br><strong>-v host_dir:container_dir</strong> 同步宿主机host_dir目录下和容器container_dir目录下的文件<br><strong>-e name=value</strong> 向容器传入环境变量<br><strong>–link containName</strong> 连接已存在的容器<br><strong>镜像名:标签</strong> 使用这个镜像创建docker容器</p>
+<h4 id="内参数解释如下"><a href="#内参数解释如下" class="headerlink" title="[]内参数解释如下"></a>[]内参数解释如下</h4><p><strong>-it</strong> 容器的 Shell 映射到当前的 Shell，然后你在本机窗口输入的命令，就会传入容器。<br><strong>-d</strong> 启动docker容器在后台，执行命令后返回容器ID<br><strong>-p 22</strong> 将宿主机的一个未使用的随机端口映射到容器的22端口，每次宿主机或容器重启后，映射端口改变<br><strong>-P 2222:22</strong> 容器的 22 端口映射到本机的 2222 端口，宿主机或容器重启后，映射端口不变<br><strong>–name 容器名</strong> 给容器命名<br><strong>–rm</strong> 容器停止运行后，自动删除容器文件<br><strong>-v host_dir:container_dir</strong> 同步宿主机host_dir目录下和容器container_dir目录下的文件<br><strong>-e name=value</strong> 向容器传入环境变量<br><strong>–link containName</strong> 连接已存在的容器<br><strong>镜像名:标签</strong> 使用这个镜像创建docker容器</p>
 <p>查看本地运行状态的容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker ps</div></pre></td></tr></table></figure></p>
 <p>查看本地所有容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker ps -a</div></pre></td></tr></table></figure></p>
 <p>停止运行中的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker stop 容器id</div></pre></td></tr></table></figure></p>
@@ -417,24 +417,27 @@
 <h2 id="Docker-Registry"><a href="#Docker-Registry" class="headerlink" title="Docker Registry"></a>Docker Registry</h2><p>Docker有官方的仓库<a href="https://hub.docker.com/explore/" target="_blank" rel="external">DockerHub</a>仓库。但很多时候我们往往需要建一个自己的私有仓库，私有仓库地址如<strong>register_url:port/namespace/image_name:tag</strong>，这里的namespace可以没有，tag没有默认为latest</p>
 <p>步骤可分如下几步，假设远程主机的registry_url是172.17.251.33，并且本地主机可以Ping通：</p>
 <ol>
-<li>远程主机启动registry容器<br>下载最新的registry镜像：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull registry</div></pre></td></tr></table></figure>
-</li>
+<li>远程主机启动registry容器</li>
 </ol>
+<p>下载最新的registry镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull registry</div></pre></td></tr></table></figure></p>
 <p>启动容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 5000:5000 --name registry registry</div></pre></td></tr></table></figure></p>
 <ol>
-<li>本地主机修改配置文件<br>之所以有这一步是因为docker只允许https的registry_url，如果registry_url为http则需要修改本地机器的Docker配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/default/docker</div></pre></td></tr></table></figure>
-</li>
+<li>本地主机修改配置文件</li>
 </ol>
+<p>之所以有这一步是因为docker只允许https的registry_url，如果registry_url为http则需要修改本地机器的Docker配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/default/docker</div></pre></td></tr></table></figure></p>
 <p>增加以下一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DOCKER_OPTS=&quot;$DOCKER_OPTS --insecure-registry=172.17.251.33:5000&quot;</div></pre></td></tr></table></figure></p>
 <p>重启Docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service docker restart</div></pre></td></tr></table></figure></p>
 <p>重启后registry容器关闭了，需要重新启动</p>
 <ol>
-<li><p>修改本地主机要推送的镜像文件的名字，前面加上远程仓库的url和端口</p>
+<li>修改本地主机要推送的镜像文件的名字，前面加上远程仓库的url和端口</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker tag imageName:tag 172.17.251.33:5000/imageName:tag</div></pre></td></tr></table></figure>
-</li>
-<li><p>推送</p>
+<ol>
+<li>推送</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker push 172.17.251.33:5000/imageName:tag</div></pre></td></tr></table></figure>
-</li>
+<ol>
+<li>其他</li>
 </ol>
 <p>查看镜像是否上传成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl http://172.17.251.33:5000/v1/search</div></pre></td></tr></table></figure></p>
 <p>在其他机器上下载远程私有仓库的镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull 172.17.251.33:5000/imageName:tag</div></pre></td></tr></table></figure></p>
@@ -663,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile"><span class="nav-number">1.</span> <span class="nav-text">Dockerfile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADD-amp-COPY"><span class="nav-number">1.2.</span> <span class="nav-text">ADD & COPY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENTRYPOINT-amp-CMD"><span class="nav-number">1.3.</span> <span class="nav-text">ENTRYPOINT & CMD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ENTRYPOINT"><span class="nav-number">1.3.1.</span> <span class="nav-text">ENTRYPOINT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMD"><span class="nav-number">1.3.2.</span> <span class="nav-text">CMD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ONBUILD"><span class="nav-number">1.4.</span> <span class="nav-text">ONBUILD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VOLUME"><span class="nav-number">1.5.</span> <span class="nav-text">VOLUME</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#镜像-amp-容器的常用命令"><span class="nav-number">2.</span> <span class="nav-text">镜像 & 容器的常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像"><span class="nav-number">2.1.</span> <span class="nav-text">镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器"><span class="nav-number">2.2.</span> <span class="nav-text">容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">3.</span> <span class="nav-text">Docker-Compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关命令"><span class="nav-number">3.2.</span> <span class="nav-text">相关命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Registry"><span class="nav-number">4.</span> <span class="nav-text">Docker Registry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins持续集成"><span class="nav-number">5.</span> <span class="nav-text">Jenkins持续集成</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile"><span class="nav-number">1.</span> <span class="nav-text">Dockerfile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADD-amp-COPY"><span class="nav-number">1.2.</span> <span class="nav-text">ADD & COPY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENTRYPOINT-amp-CMD"><span class="nav-number">1.3.</span> <span class="nav-text">ENTRYPOINT & CMD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ENTRYPOINT"><span class="nav-number">1.3.1.</span> <span class="nav-text">ENTRYPOINT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMD"><span class="nav-number">1.3.2.</span> <span class="nav-text">CMD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ONBUILD"><span class="nav-number">1.4.</span> <span class="nav-text">ONBUILD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VOLUME"><span class="nav-number">1.5.</span> <span class="nav-text">VOLUME</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#镜像-amp-容器的常用命令"><span class="nav-number">2.</span> <span class="nav-text">镜像 & 容器的常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像"><span class="nav-number">2.1.</span> <span class="nav-text">镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器"><span class="nav-number">2.2.</span> <span class="nav-text">容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内参数解释如下"><span class="nav-number">2.2.1.</span> <span class="nav-text">[]内参数解释如下</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">3.</span> <span class="nav-text">Docker-Compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关命令"><span class="nav-number">3.2.</span> <span class="nav-text">相关命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Registry"><span class="nav-number">4.</span> <span class="nav-text">Docker Registry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins持续集成"><span class="nav-number">5.</span> <span class="nav-text">Jenkins持续集成</span></a></li></ol></div>
             
 
           </div>
